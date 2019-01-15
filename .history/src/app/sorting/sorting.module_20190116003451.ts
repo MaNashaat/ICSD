@@ -7,14 +7,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SortingComponent } from './sorting.component';
 import { HeaderComponent } from '../layout/components/header/header.component';
 import { SidebarComponent } from '../layout/components/sidebar/sidebar.component';
-import { SortingRoutingModule } from './sorting-routing.module';
 
 
 
 @NgModule({
   imports: [
     CommonModule,
-    SortingRoutingModule,
     ReactiveFormsModule,
     FormsModule
   ],
