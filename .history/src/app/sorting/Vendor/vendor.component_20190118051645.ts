@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { Http, Response } from '@angular/http';
 import { VendorService } from './vendor.service';
-import { OrganizationService } from '../organization/organization.service';
+import { CountryService } from '../country/country.service';
 
 @Component({
     selector: 'vendor-page',
@@ -23,13 +23,12 @@ export class VendorComponent implements OnInit, AfterViewInit {
     dtTrigger: Subject<any> = new Subject();
     list: any[] = [];
     dtOptions: DataTables .Settings = {};
-    operation = 'view';
+    operation: string = 'view';
     item = {};
-    orginzations: any[];
-    selectedorginzation: any;
-    config2: any = {'placeholder': 'Select organization', 'sourceField': ['NameEn']};
+    Countries:any[];
+    config2: any = {'placeholder': 'Select Country', 'sourceField': ['NameEn']};
 
-    constructor(private serviceApi: VendorService, private OrganizationService: OrganizationService, private patterns: PatternsService, private http: Http) { }
+    constructor(private serviceApi: VendorService,private countryService : CountryService, private patterns: PatternsService, private http: Http) { }
 
     ngAfterViewInit(): void {
         this.dtTrigger.next();
@@ -48,27 +47,28 @@ export class VendorComponent implements OnInit, AfterViewInit {
                 this.item = Object.assign({}, _item);
                 break;
         }
-    };
+    }
     save = function () {
         this.applySave(this.item);
-    };
+    }
     delete = function (_item: any) {
         _item.IsDeleted = true;
         this.applySave(_item);
     };
     private applySave = function (item) {
         debugger ;
-        item.Organizations_Id = this.selectedorginzation.ID;
+        item.Countries_ID= this.country.ID;
         this.serviceApi.updateItem(item).subscribe(result => {
             debugger;
-            const filterResult = this.list.filter(function (element, index, array) {
+            var filterResult = this.list.filter(function (element, index, array) {
                 return element.ID === result.ID;
             });
-            if (filterResult.length === 0) {
+            if (filterResult.length == 0) {
                 this.list.push(result);
-            } else {
-                const index: number = this.list.indexOf(filterResult[0]);
-                if (result.IsDeleted === undefined || ! result.IsDeleted) {
+            }
+            else {
+                let index: number = this.list.indexOf(filterResult[0]);
+                if (result.IsDeleted === undefined ||! result.IsDeleted) {
                     this.list[index] = Object.assign({}, result);
                 } else {
                     this.list.splice(index, 1);
@@ -96,18 +96,19 @@ export class VendorComponent implements OnInit, AfterViewInit {
             pagingType: 'full_numbers',
             stateSave: true
         };
-        this.OrganizationService.getItems().subscribe(list => {
-            this.orginzations = list;
+        this.countryService.getItems().subscribe(list => {
+            this.Countries = list;
         });
     }
 
 
-    OrganizationSelected(event) {
-        this.selectedorginzation = event;
-       this.serviceApi.getItemsbyOrganization(event.ID).subscribe(list => {
+    CountrySelected(event) {
+       /* this.serviceApi.getItems(event.ID).subscribe(list => {
             this.refreshDataSource(list);
-        });
+        });*/
 
     }
+    onInputChangedEvent($event) {
 
+    }
 }

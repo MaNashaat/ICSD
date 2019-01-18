@@ -5,7 +5,7 @@
         <div class="col col-sm-12">
             <div class="card mb-3">
                 <div class="card-header">
-                    Vendor
+                    City
                     <button class="btn btn-sm pull-right btn-success" (click)="open()">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
@@ -14,11 +14,11 @@
 
                     <div class="row">
                         <div class="col-xl-9">
-                            <label>Organization</label>
+                            <label>Country</label>
                                 <div class="form-group">
                                     <form autocomplete="off">
-                                        <input class="form-control" type="text" autocomplete [config]="config2" [items]="orginzations" (inputChangedEvent)="onInputChangedEvent($event)"
-                                            (selectEvent)="OrganizationSelected($event)">
+                                        <input class="form-control" type="text" autocomplete [config]="config2" [items]="Countries" (inputChangedEvent)="onInputChangedEvent($event)"
+                                            (selectEvent)="CountrySelected($event)">
                                     </form>
                                 </div>
 

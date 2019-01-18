@@ -21,9 +21,8 @@ const routes: Routes = [
             { path: 'area', loadChildren: '../sorting/area/area.module#AreaModule'},
             { path: 'organization', loadChildren: '../sorting/organization/organization.module#OrganizationModule'},
             { path: 'customer', loadChildren: '../sorting/customer/customer.module#CustomerModule'},
-            { path: 'courier', loadChildren: '../sorting/customer/customer.module#CustomerModule'},
-            { path: 'vendor', loadChildren: '../sorting/vendor/vendor.module#VendorModule'}
-
+            { path: 'courier', loadChildren: '../sorting/customer/customer.module#CustomerModule'}
+      
         ]
     }
 ];

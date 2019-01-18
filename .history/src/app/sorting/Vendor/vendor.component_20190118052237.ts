@@ -25,11 +25,10 @@ export class VendorComponent implements OnInit, AfterViewInit {
     dtOptions: DataTables .Settings = {};
     operation = 'view';
     item = {};
-    orginzations: any[];
-    selectedorginzation: any;
+    orginzations:any[];
     config2: any = {'placeholder': 'Select organization', 'sourceField': ['NameEn']};
 
-    constructor(private serviceApi: VendorService, private OrganizationService: OrganizationService, private patterns: PatternsService, private http: Http) { }
+    constructor(private serviceApi: VendorService,private OrganizationService : OrganizationService, private patterns: PatternsService, private http: Http) { }
 
     ngAfterViewInit(): void {
         this.dtTrigger.next();
@@ -58,7 +57,7 @@ export class VendorComponent implements OnInit, AfterViewInit {
     };
     private applySave = function (item) {
         debugger ;
-        item.Organizations_Id = this.selectedorginzation.ID;
+        item.Countries_ID = this.organization.ID;
         this.serviceApi.updateItem(item).subscribe(result => {
             debugger;
             const filterResult = this.list.filter(function (element, index, array) {
@@ -103,10 +102,9 @@ export class VendorComponent implements OnInit, AfterViewInit {
 
 
     OrganizationSelected(event) {
-        this.selectedorginzation = event;
-       this.serviceApi.getItemsbyOrganization(event.ID).subscribe(list => {
+      /* this.serviceApi.g(event.ID).subscribe(list => {
             this.refreshDataSource(list);
-        });
+        });*/
 
     }
 

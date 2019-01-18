@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Vendor } from './vendor';
-
+import 'rxjs/add/operator/map';
 import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
@@ -29,8 +29,8 @@ export class VendorService {
   addItem(item): Observable<object> {
     return this.http.post(environment.apiURL + 'Vendor/Save', item);
   }
-  updateItem(item) {
-
+  updateItem(id, item) {
+    item.ID = id;
     // item.IsDeleted =false;
     return this.http.post(environment.apiURL + 'Vendor/Save', item);
     // this.items = this.items.map(i => {
