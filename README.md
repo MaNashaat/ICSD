@@ -2,13 +2,13 @@
 
 Simple Dashboard Admin App built using Angular 7 and Bootstrap 4
 
-This project is a [ICSD v1.0](http://startbootstrap.com/template-overviews/sb-admin-2/) to Angular7 Theme.
+This project is a port of the famous Free Admin Bootstrap Theme [ICSD v7.0](http://startbootstrap.com/template-overviews/sb-admin-2/) to Angular7 Theme.
 
 Powered by [StartAngular](http://startangular.com/) & [StrapUI](http://strapui.com/)
 
-## [Demo](http://rawgit.com/start-angular/ICSD/master/dist/)
+## [Demo](http://rawgit.com/start-angular/SB-Admin-BS4-Angular-7/master/dist/)
 
-## [ICSD Material version](https://github.com/MaNashaat/ICSD)
+## [ICSD Material version](https://github.com/start-javascript/sb-admin-material)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.4.
 
@@ -16,7 +16,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Provides fast, reliable and extensible starter for the development of Angular projects.
 
-`ICSD` provides the following features:
+`sb-admin-bs4-angular7` provides the following features:
 
 *   Developed using boostrap-v4.0.0
 *   angular-v7.0.2
@@ -36,8 +36,8 @@ Provides fast, reliable and extensible starter for the development of Angular pr
 In order to start the project use:
 
 ```bash
-$ git clone https://github.com/MaNashaat/ICSD
-$ cd ICSD
+$ git clone https://github.com/start-angular/SB-Admin-BS4-Angular-7
+$ cd SB-Admin-BS4-Angular-7
 # install the project's dependencies
 $ npm install
 # watches your files and uses livereload by default run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

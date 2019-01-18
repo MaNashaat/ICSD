@@ -15,7 +15,14 @@ const routes: Routes = [
             { path: 'bs-element', loadChildren: './bs-element/bs-element.module#BsElementModule' },
             { path: 'grid', loadChildren: './grid/grid.module#GridModule' },
             { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
-            { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' }
+            { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' },
+            { path: 'country', loadChildren: '../sorting/country/country.module#CountryModule'},
+            { path: 'city', loadChildren: '../sorting/city/city.module#CityModule'},
+            { path: 'area', loadChildren: '../sorting/area/area.module#AreaModule'},
+            { path: 'organization', loadChildren: '../sorting/organization/organization.module#OrganizationModule'},
+            { path: 'customer', loadChildren: '../sorting/customer/customer.module#CustomerModule'},
+            { path: 'courier', loadChildren: '../sorting/customer/customer.module#CustomerModule'}
+      
         ]
     }
 ];

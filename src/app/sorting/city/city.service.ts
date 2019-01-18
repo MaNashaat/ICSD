@@ -21,9 +21,9 @@ export class CityService {
   addItem(item): Observable<Object> {
     return this.http.post(environment.apiURL + 'City/save', item);
   }
-  updateItem(id, item) {
-    item.ID = id;
-    item.IsDeleted = false;
+  updateItem(item) {
+   // item.ID = id;
+    //item.IsDeleted = false;
     return this.http.post(environment.apiURL + 'City/save', item);
   }
   removeItem(row) {

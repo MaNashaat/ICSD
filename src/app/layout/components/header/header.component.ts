@@ -39,7 +39,8 @@ export class HeaderComponent implements OnInit {
 
   rltAndLtr() {
     const dom: any = document.querySelector('body');
-    dom.classList.toggle('rtl');
+    dom.classList.addLangs('rtl');
+    dom.classList.removeItem('rtl');
   }
 
   onLoggedout() {

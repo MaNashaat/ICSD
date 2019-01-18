@@ -4,11 +4,12 @@ import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Country } from './country';
-import 'rxjs/add/operator/map';
+
 import { environment } from '../../../environments/environment';
-@Injectable({
-  providedIn: SortingModule
-})
+
+
+import { CountryModule } from './country.module';
+@Injectable()
 export class CountryService {
   items: any[];
   Countryies: Country[];
@@ -28,8 +29,8 @@ export class CountryService {
   addItem(item): Observable<object> {
     return this.http.post(environment.apiURL + 'Country/Save', item);
   }
-  updateItem(id, item) {
-    item.ID = id;
+  updateItem(item) {
+  //  item.ID = id;
     // item.IsDeleted =false;
     return this.http.post(environment.apiURL + 'Country/Save', item);
     /* this.items = this.items.map(i => {

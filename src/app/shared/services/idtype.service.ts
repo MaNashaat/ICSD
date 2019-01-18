@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IDType } from '../../../app/sorting/transaction/idtype';
+import { IDType } from '../../sorting/transaction/idtype';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 

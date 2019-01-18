@@ -3,26 +3,31 @@ import { CommonModule } from '@angular/common';
 
 
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule ,Validators} from '@angular/forms';
 import { SortingComponent } from './sorting.component';
-import { HeaderComponent } from '../layout/components/header/header.component';
-import { SidebarComponent } from '../layout/components/sidebar/sidebar.component';
-import { SortingRoutingModule } from './sorting-routing.module';
+import { DataTablesModule } from 'angular-datatables';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover'
+import { CountryComponent } from './country/country.component';
+import { CountryService } from './country/country.service';
 
 
 
 @NgModule({
   imports: [
     CommonModule,
-    SortingRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    DataTablesModule,
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger' // set defaults here
+    })
   ],
   declarations: [
-    SortingComponent,
-    HeaderComponent,
-    SidebarComponent
+    SortingComponent
+    
+
   ],
+  //providers:[CountryService],
   entryComponents: [
   ]
 })

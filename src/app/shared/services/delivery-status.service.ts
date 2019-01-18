@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DeliveryStatus } from '../../../app/sorting/transaction/delivery-status';
+import { DeliveryStatus } from '../../sorting/transaction/delivery-status';
 import { environment } from '../../../environments/environment.prod';
 import { Observable } from 'rxjs';
 

@@ -4,9 +4,8 @@ import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Area } from './area';
-import 'rxjs/add/operator/map';
 import { environment } from '../../../environments/environment';
-import 'rxjs/add/operator/map';
+
 
 @Injectable({
   providedIn: 'root'
@@ -25,9 +24,8 @@ export class AreaService {
   addItem(item): Observable<Object> {
     return this.http.post(environment.apiURL + 'Area/save', item);
   }
-  updateItem(id, item) {
-    item.ID = id;
-    item.IsDeleted = false;
+  updateItem(item) {
+
     return this.http.post(environment.apiURL + 'Area/save', item);
   }
   removeItem(row) {
