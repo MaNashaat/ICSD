@@ -8,6 +8,7 @@ import { SortingComponent } from './sorting.component';
 import { HeaderComponent } from '../layout/components/header/header.component';
 import { SidebarComponent } from '../layout/components/sidebar/sidebar.component';
 import { SortingRoutingModule } from './sorting-routing.module';
+import { ShipmentListComponent } from './shipment/shipment-list/shipment-list.component';
 
 
 
@@ -21,7 +22,8 @@ import { SortingRoutingModule } from './sorting-routing.module';
   declarations: [
     SortingComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    ShipmentListComponent
   ],
   entryComponents: [
   ]
