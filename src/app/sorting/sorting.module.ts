@@ -3,19 +3,18 @@ import { CommonModule } from '@angular/common';
 
 
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule, FormsModule ,Validators} from '@angular/forms';
+import { ReactiveFormsModule, FormsModule , Validators} from '@angular/forms';
 import { SortingComponent } from './sorting.component';
-<<<<<<< HEAD
+
 import { DataTablesModule } from 'angular-datatables';
-import { ConfirmationPopoverModule } from 'angular-confirmation-popover'
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { CountryComponent } from './country/country.component';
 import { CountryService } from './country/country.service';
-=======
+
 import { HeaderComponent } from '../layout/components/header/header.component';
 import { SidebarComponent } from '../layout/components/sidebar/sidebar.component';
 import { SortingRoutingModule } from './sorting-routing.module';
 import { ShipmentListComponent } from './shipment/shipment-list/shipment-list.component';
->>>>>>> 5eed0eb79c6267c6fa6b022cd0cd20a7ec501e4f
 
 
 
@@ -27,21 +26,17 @@ import { ShipmentListComponent } from './shipment/shipment-list/shipment-list.co
     DataTablesModule,
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger' // set defaults here
-    })
+    }),
+    SortingRoutingModule
   ],
   declarations: [
-<<<<<<< HEAD
-    SortingComponent
-    
-
-=======
+    SortingComponent,
     SortingComponent,
     HeaderComponent,
     SidebarComponent,
     ShipmentListComponent
->>>>>>> 5eed0eb79c6267c6fa6b022cd0cd20a7ec501e4f
   ],
-  //providers:[CountryService],
+  // providers:[CountryService],
   entryComponents: [
   ]
 })
