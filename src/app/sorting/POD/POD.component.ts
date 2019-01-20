@@ -171,6 +171,20 @@ export class PODComponent implements OnInit, AfterViewInit {
         }
     }
 
+    SubmintShipment(){
+        if (this.selectedItems.length > 0 &&this.selectedCourier.length > 0&&  this.ShipmentDt != undefined) {
+            var requestData = new ShipmentBOD();
+
+            requestData.Customers = this.selectedItems;
+             requestData.ShipmentDt=this.ShipmentDt;
+            requestData.Courier = this.selectedCourier[0];
+            this.serviceApi.save(requestData).subscribe(list => {
+              //  this.refreshDataSource(list);
+            });
+    
+    
+        }
+      }
 
 
 

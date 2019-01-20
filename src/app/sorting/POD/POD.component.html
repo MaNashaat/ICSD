@@ -43,8 +43,7 @@
                             </div>
 
                         </div><div class="col-xl-6">
-                            <button class="btn btn-success" [disabled]="selectedCourier.length==0 ||selectedItems.length==0 " type="submit">Submit
-                            </button>
+                            <button class="btn btn-success" [disabled]="selectedCourier.length==0 ||selectedItems.length==0 " (click)="SubmintShipment()" type="submit">Submit </button>
                         </div>
 
                         

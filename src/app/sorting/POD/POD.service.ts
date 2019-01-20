@@ -24,6 +24,9 @@ export class  PODService {
   getItems(data): Observable<ShipmentBOD[]> {
     return <Observable<ShipmentBOD[]>>this.http.post(environment.apiURL + 'POD/GetAllPOD', data);
   }
+  save(data): Observable<ShipmentBOD[]> {
+    return <Observable<ShipmentBOD[]>>this.http.post(environment.apiURL + 'POD/Save', data);
+  }
   getDeliverAgency(): Observable<ShipmentBOD[]> {
     return <Observable<ShipmentBOD[]>>this.http.get(environment.apiURL + 'DeliverAcencies/GetAll');
   }
