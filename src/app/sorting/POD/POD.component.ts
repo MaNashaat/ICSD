@@ -9,13 +9,15 @@ import { Http, Response } from '@angular/http';
 import { PODService } from './POD.service';
 import { CountryService } from '../country/country.service';
 import { CityService } from '../city/city.service';
+import { CustomerService } from '../customer/customer.service';
+import { ShipmentBOD } from './POD';
 
 @Component({
     selector: 'POD-page',
     templateUrl: './POD.component.html',
     styleUrls: ['./POD.component.css'],
     animations: [routerTransition()],
-    providers: [CountryService, CityService, PODService]
+    providers: [CustomerService, PODService]
 })
 
 export class PODComponent implements OnInit, AfterViewInit {
@@ -24,21 +26,28 @@ export class PODComponent implements OnInit, AfterViewInit {
     dtElement: DataTableDirective;
     dtTrigger: Subject<any> = new Subject();
     list: any[] = [];
-    dtOptions: DataTables .Settings = {};
+    dtOptions: DataTables.Settings = {};
     operation: string = 'view';
     item = {};
-    Countries: any[];
-    SelectedCoutryID: number;
-    configCountry: any = { 'placeholder': 'Select Country', 'sourceField': ['NameEn'] };
+    Cutstomers: any[];
+    SelectedCustomerID: number;
+    configCustomer: any = { 'placeholder': 'Select Country', 'sourceField': ['NameEn'] };
 
-    Cities: any[];
-    SelectedCityID: number;
-    configCity: any = { 'placeholder': 'Select City', 'sourceField': ['NameEn'] };
+    Couriers: any[];
+    SelectedCourierID: number;
+    configCourier: any = { 'placeholder': 'Select City', 'sourceField': ['NameEn'] };
 
-
+    selectedItems = [];
+    selectedCourier=[];
+    settings = {};
+    settingsCouriers = {};
+    ShipmentDt : Date = new Date();
     constructor(private serviceApi: PODService,
-        private cityService: CityService,
-        private countryService : CountryService, private patterns: PatternsService, private http: Http) { }
+        private CustomerService: CustomerService,
+        private countryService: CountryService, private patterns: PatternsService, private http: Http) { 
+
+            this.ShipmentDt =new Date()
+        }
 
     ngAfterViewInit(): void {
         this.dtTrigger.next();
@@ -66,8 +75,8 @@ export class PODComponent implements OnInit, AfterViewInit {
         this.applySave(_item);
     }
     private applySave = function (item) {
-        debugger ;
-        item.Cities_ID = this.SelectedCityID;
+        debugger;
+        item.Cities_ID = this.SelectedCourierID;
         this.serviceApi.updateItem(item).subscribe(result => {
             debugger;
             var filterResult = this.list.filter(function (element, index, array) {
@@ -78,7 +87,7 @@ export class PODComponent implements OnInit, AfterViewInit {
             }
             else {
                 var index: number = this.list.indexOf(filterResult[0]);
-                if (result.IsDeleted == undefined ||! result.IsDeleted) {
+                if (result.IsDeleted == undefined || !result.IsDeleted) {
                     this.list[index] = Object.assign({}, result);
                 }
                 else {
@@ -107,24 +116,77 @@ export class PODComponent implements OnInit, AfterViewInit {
             pagingType: 'full_numbers',
             stateSave: true
         };
-        this.countryService.getItems().subscribe(list => {
-            this.Countries =list;
+        this.CustomerService.getItemsSimple(1).subscribe(list => {
+            this.Cutstomers = list;
         });
+        this.CustomerService.getItemsSimple(2).subscribe(list => {
+            this.Couriers = list;
+        });
+
+        this.settings = {
+            singleSelection: false,
+            text: "Select Cutomers",
+            selectAllText: 'Select All',
+            unSelectAllText: 'UnSelect All',
+            enableSearchFilter: true,
+            badgeShowLimit: 3,
+            labelKey: "NameEn",
+            primaryKey: "ID"
+        };
+        this.settingsCouriers =
+            this.settings = {
+                singleSelection: true,
+                text: "Select Couriers",
+                selectAllText: 'Select All',
+                unSelectAllText: 'UnSelect All',
+                enableSearchFilter: true,
+                badgeShowLimit: 3,
+                labelKey: "NameEn",
+                primaryKey: "ID"
+            };
     }
-    CountrySelected(event) {
-        this.Cities = [];
-        this.SelectedCoutryID = event.ID;
-        this.cityService.getItems(event.ID).subscribe(list => {
-            this.Cities = list;
-        });
 
 
+    CustomerSelected(event) {
+        this.SelectedCustomerID = event.ID;
+        this.getShipment();
     }
-    CitySelected(event) {
-        this.SelectedCityID = event.ID;
+    CourierSelected(event) {
+        this.SelectedCourierID = event.ID;
+        this.getShipment();
+    }
 
-        this.serviceApi.getItems(event.ID).subscribe(list => {
-            this.refreshDataSource(list);
-        });
+
+    getShipment() {
+        debugger
+        if (this.selectedItems.length > 0 && this.ShipmentDt != undefined) {
+            var requestData = new ShipmentBOD();
+
+            requestData.Customers = this.selectedItems;
+             requestData.ShipmentDt=this.ShipmentDt;
+            requestData.Courier = this.selectedCourier[0];
+            this.serviceApi.getItems(requestData).subscribe(list => {
+                this.refreshDataSource(list);
+            });
+        }
+    }
+
+
+
+
+    onItemSelect(item: any) {
+        this.getShipment();
+    }
+    OnItemDeSelect(item: any) {
+        this.getShipment();
+    }
+    onSelectAll(items: any) {
+        this.getShipment();
+    }
+    onDeSelectAll(items: any) {
+        this.getShipment();
+    }
+    onCourierSelect(items: any) {
+        this.getShipment();
     }
 }

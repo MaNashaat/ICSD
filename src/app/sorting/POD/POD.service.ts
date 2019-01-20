@@ -4,13 +4,12 @@ import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { ShipmentBOD } from './POD';
-import 'rxjs/add/operator/map';
-import { environment } from '../../../environments/environment';
+import { Declaration } from './declaration';
 
+import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: SortingModule
 })
-
 export class  PODService {
   items: any[];
   Declarationies: ShipmentBOD[];
@@ -23,7 +22,7 @@ export class  PODService {
   // ******* Implement your APIs ********
 
   getItems(data): Observable<ShipmentBOD[]> {
-    return <Observable<ShipmentBOD[]>>this.http.post(environment.apiURL + 'Shipment/GetAllBOD', data);
+    return <Observable<ShipmentBOD[]>>this.http.post(environment.apiURL + 'POD/GetAllPOD', data);
   }
   getDeliverAgency(): Observable<ShipmentBOD[]> {
     return <Observable<ShipmentBOD[]>>this.http.get(environment.apiURL + 'DeliverAcencies/GetAll');
