@@ -1,0 +1,46 @@
+<p>
+  shipment-list works!
+</p>
+<div class="col col-sm-12">
+  <div class="card mb-3">
+    <div class="card-header">
+      Country <button class="btn btn-sm pull-right btn-success" (click)="open()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+    </div>
+    <div class="card-body">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped row-border hover">
+        <thead id="table">
+          <tr>
+            <th>Code</th>
+            <th>Organization</th>
+            <th>Vendor</th>
+            <th>Couriers</th>
+            <th>Customers</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let _item of list">
+            <td>{{ _item.Code }}</td>
+            <td>{{ _item.organization.Name }}</td>
+            <td>{{ _item.vendor.Name }}</td>
+            <td>{{ _item.courier.Name }}</td>
+            <td>{{ _item.Customer.Name }}</td>
+            <td>
+              <button class="btn btn-sm btn-success" (click)="open(_item)"><i class="fa fa-eye" aria-hidden="true"></i></button>
+              <button
+                class="btn btn-sm btn-danger"
+                mwlConfirmationPopover
+                popoverTitle="Confirm Delete ?"
+                (confirm)="delete(_item)"
+                cancelText="No <i class='fa fa-ban' aria-hidden='true'></i>"
+                confirmText="Yes <i class='fa fa-check' aria-hidden='true'></i>"
+              >
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

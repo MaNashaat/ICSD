@@ -31,7 +31,7 @@
     "angular-datatables": "^7.0.0",
     "chart.js": "2.7.3",
     "core-js": "2.5.7",
-    "datatables.net": "^1.10.16",
+    "datatables.net": "^1.10.19",
     "font-awesome": "4.7.0",
     "ng2-charts": "1.6.0",
     "ng2-input-autocomplete": "^0.2.1",
