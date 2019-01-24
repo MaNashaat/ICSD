@@ -1,5 +1,5 @@
 export class ShipmentBOD {
-    ShipmentDt: Date;
-    Customers: any[];
-    Courier:any;
+    public ShipmentDt: Date;
+  public   Customers: any[]
+  public   Courier: {}
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PatternsService } from 'src/app/shared/services/patterns.service';
 import { ShipmentService } from './shipment.service';
 import { Subject } from 'rxjs';
@@ -14,8 +14,7 @@ import { NgForm } from '@angular/forms';
 export class ShipmentComponent implements OnInit {
   @ViewChild('detailsForm') public detailsForm: NgForm;
   operation = 'view';
-  item: any = {};
-  list: Shipment[];
+
   ngOnInit(): void {}
 
   open = function(_item: any) {

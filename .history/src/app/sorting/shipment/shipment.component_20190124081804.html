@@ -1,6 +1,6 @@
 <div [@routerTransition]>
-  <div class="row" [hidden]="operation != 'view'"><app-shipment-list></app-shipment-list></div>
-  <form name="detailsForm" #detailsForm="ngForm" class="row" (ngSubmit)="save()" [hidden]="operation == 'view'" novalidate>
+<app-shipment-list></app-shipment-list>
+<form name="detailsForm" #detailsForm="ngForm" class="row" (ngSubmit)="save()" [hidden]="operation == 'view'" novalidate>
     <div class="col col-sm-12">
       <div class="card mb-3">
         <div class="card-header">

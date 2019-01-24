@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { PatternsService } from 'src/app/shared/services/patterns.service';
 import { ShipmentService } from '../shipment.service';
 import { Subject } from 'rxjs';
@@ -15,8 +15,9 @@ export class ShipmentListComponent implements OnInit, AfterViewInit {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
   dtTrigger: Subject<any> = new Subject();
-  @Input() list: Shipment[];
+  list: Shipment[];
   dtOptions: DataTables.Settings = {};
+  item: any = {};
   constructor(private _service: ShipmentService, private patterns: PatternsService) {}
 
   ngAfterViewInit(): void {

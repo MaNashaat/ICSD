@@ -15,7 +15,7 @@ export class ShipmentComponent implements OnInit {
   @ViewChild('detailsForm') public detailsForm: NgForm;
   operation = 'view';
   item: any = {};
-  list: Shipment[];
+  @Input() list: Shipment[];
   ngOnInit(): void {}
 
   open = function(_item: any) {

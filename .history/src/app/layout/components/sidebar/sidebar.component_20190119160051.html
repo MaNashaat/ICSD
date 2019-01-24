@@ -1,64 +1,38 @@
-<nav class="sidebar" [ngClass]="{ sidebarPushRight: isActive, collapsed: collapsed }">
-  <div class="list-group">
-    <a routerLink="/charts" [routerLinkActive]="['router-link-active']" class="list-group-item">
-      <i class="fa fa-fw fa-dashboard"></i>&nbsp; <span>{{ 'Dashboard' | translate }}</span>
-    </a>
-    <div class="nested-menu">
-      <a class="list-group-item" (click)="addExpandClass('pages')">
-        <i class="fa fa-random"></i>&nbsp; <span>{{ 'Sorting' | translate }}</span>
-      </a>
-      <li class="nested" [class.expand]="showMenu === 'pages'">
-        <ul class="submenu">
-          <li>
-            <a routerLink="/shipment" [routerLinkActive]="['router-link-active']" class="list-group-item">
-              <i class="fa fa-truck"></i>&nbsp; <span>{{ 'Shipment' | translate }}</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/POD" [routerLinkActive]="['router-link-active']" class="list-group-item">
-              <i class="fa fa-globe"></i>&nbsp; <span>{{ 'POD' | translate }}</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/country" [routerLinkActive]="['router-link-active']" class="list-group-item">
-              <i class="fa fa-globe"></i>&nbsp; <span>{{ 'Country' | translate }}</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/city" [routerLinkActive]="['router-link-active']" class="list-group-item">
-              <i class="fa fa-fw fa-dashboard"></i>&nbsp; <span>{{ 'City' | translate }}</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/area" [routerLinkActive]="['router-link-active']" class="list-group-item">
-              <i class="fa fa-fw fa-dashboard"></i>&nbsp; <span>{{ 'Area' | translate }}</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/organization" [routerLinkActive]="['router-link-active']" class="list-group-item">
-              <i class="fa fa-fw fa-dashboard"></i>&nbsp; <span>{{ 'Organizations' | translate }}</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/vendor" [routerLinkActive]="['router-link-active']" class="list-group-item">
-              <i class="fa fa-fw fa-dashboard"></i>&nbsp; <span>{{ 'Vendors' | translate }}</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/customer" [routerLinkActive]="['router-link-active']" class="list-group-item">
-              <i class="fa fa-fw fa-dashboard"></i>&nbsp; <span>{{ 'Cutomers' | translate }}</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/courier" [routerLinkActive]="['router-link-active']" class="list-group-item">
-              <i class="fa fa-fw fa-dashboard"></i>&nbsp; <span>{{ 'Couriers' | translate }}</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-    </div>
-
-    <!---  <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
+    <div class="list-group">
+        <a routerLink="/country" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>{{ 'Country' | translate }}</span>
+        </a>
+        <a routerLink="/city" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>{{ 'City' | translate }}</span>
+        </a>
+        <a routerLink="/area" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>{{ 'Area' | translate }}</span>
+        </a>
+        <a routerLink="/organization" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>{{ 'Organizations' | translate }}</span>
+        </a>
+        <a routerLink="/vendor" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>{{ 'Supports' | translate }}</span>
+        </a>
+        <a routerLink="/customer" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>{{ 'Cutomers' | translate }}</span>
+        </a>
+        <a routerLink="/courier" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>{{ 'Couriers' | translate }}</span>
+        </a>
+        <a routerLink="/POD" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>{{ 'BOD' | translate }}</span>
+        </a>
+      <!---  <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;
             <span>{{ 'Dashboard' | translate }}</span>
         </a>
@@ -201,8 +175,9 @@
                 </li>
             </div>
         </div>-->
-  </div>
-  <div class="toggle-button" [ngClass]="{ collapsed: collapsed }" (click)="toggleCollapsed()">
-    <i class="fa fa-fw fa-angle-double-left"></i>&nbsp; <span>{{ 'Collapse Sidebar' | translate }}</span>
-  </div>
+    </div>
+    <div class="toggle-button" [ngClass]="{collapsed: collapsed}" (click)="toggleCollapsed()">
+        <i class="fa fa-fw fa-angle-double-left"></i>&nbsp;
+        <span>{{ 'Collapse Sidebar' | translate }}</span>
+    </div>
 </nav>
