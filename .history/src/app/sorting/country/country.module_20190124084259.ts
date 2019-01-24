@@ -5,26 +5,24 @@ import { DataTablesModule } from 'angular-datatables';
 import { PageHeaderModule } from '../../shared';
 import { ReactiveFormsModule, FormsModule, Validators } from '@angular/forms';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
-import { PODRoutingModule } from './POD-routing.module';
-import { PODComponent } from './POD.component';
-import { AutocompleteModule } from 'ng2-input-autocomplete';
-import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { CountryRoutingModule } from './country-routing.module';
+import { CountryComponent } from './country.component';
+import { CountryService } from './country.service';
+import { PatternsService } from '../../shared/services/patterns.service';
 
 @NgModule({
   imports: [
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    PODRoutingModule,
+    CountryRoutingModule,
     DataTablesModule,
     PageHeaderModule,
-    AutocompleteModule,
-    AngularMultiSelectModule,
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger' // set defaults here
     })
   ],
-  declarations: [PODComponent],
+  declarations: [CountryComponent],
   providers: []
 })
-export class PODModule {}
+export class CountryModule {}

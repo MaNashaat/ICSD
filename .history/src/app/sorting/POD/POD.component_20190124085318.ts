@@ -13,7 +13,6 @@ import { CustomerService } from '../customer/customer.service';
 import { ShipmentBOD } from './POD';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'POD-page',
   templateUrl: './POD.component.html',
   styleUrls: ['./POD.component.css'],
@@ -44,7 +43,7 @@ export class PODComponent implements OnInit, AfterViewInit {
   ShipmentDt: Date = new Date();
   constructor(
     private serviceApi: PODService,
-    private CustmService: CustomerService,
+    private CustomerService: CustomerService,
     private countryService: CountryService,
     private patterns: PatternsService,
     private http: Http
@@ -57,10 +56,10 @@ export class PODComponent implements OnInit, AfterViewInit {
       pagingType: 'full_numbers',
       stateSave: true
     };
-    this.CustmService.getItemsSimple(1).subscribe(list => {
+    this.CustomerService.getItemsSimple(1).subscribe(list => {
       this.Cutstomers = list;
     });
-    this.CustmService.getItemsSimple(2).subscribe(list => {
+    this.CustomerService.getItemsSimple(2).subscribe(list => {
       this.Couriers = list;
     });
 
@@ -117,7 +116,7 @@ export class PODComponent implements OnInit, AfterViewInit {
   private applySave = function(item) {
     item.Cities_ID = this.SelectedCourierID;
     this.serviceApi.updateItem(item).subscribe(result => {
-      const filterResult = this.list.filter(function(element, index, array) {
+      let filterResult = this.list.filter(function(element, index, array) {
         return element.ID === result.ID;
       });
       if (filterResult.length === 0) {
@@ -159,6 +158,7 @@ export class PODComponent implements OnInit, AfterViewInit {
   }
 
   getShipment() {
+    debugger;
     if (this.selectedItems.length > 0 && this.ShipmentDt !== undefined) {
       const requestData = new ShipmentBOD();
 

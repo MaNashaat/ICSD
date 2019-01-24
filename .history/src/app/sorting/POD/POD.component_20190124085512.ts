@@ -13,7 +13,6 @@ import { CustomerService } from '../customer/customer.service';
 import { ShipmentBOD } from './POD';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'POD-page',
   templateUrl: './POD.component.html',
   styleUrls: ['./POD.component.css'],
