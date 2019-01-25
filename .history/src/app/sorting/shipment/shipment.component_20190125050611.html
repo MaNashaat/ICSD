@@ -8,12 +8,10 @@
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col col-sm-12">
-              <div class="col-xl-6">
-                <label>Code <span class="text-danger">*</span>: </label>
-                <div class="form-group">
-                  <input #Code="ngModel" name="Code" class="form-control" type="text" [(ngModel)]="item.Code" disabled />
-                </div>
+            <div class="col-xl-6">
+              <label>Code <span class="text-danger">*</span>: </label>
+              <div class="form-group">
+                <input #Code="ngModel" name="Code" class="form-control" type="text" [(ngModel)]="item.Code" disabled />
               </div>
             </div>
             <div class="col-xl-6">
@@ -68,12 +66,11 @@
                 (focus)="Customerfocus$.next($event.target.value)"
                 (click)="Customerclick$.next($event.target.value)"
                 #Customer="ngbTypeahead"
-                #CustModel="ngModel"
                 [resultTemplate]="crt"
                 [inputFormatter]="formatter"
               />
-              <div *ngIf="CustModel.invalid && (CustModel.dirty || CustModel.touched)" class="alert alert-danger">
-                <div *ngIf="CustModel.errors.required">Customer is required.</div>
+              <div *ngIf="Customer.invalid && (Customer.dirty || Customer.touched)" class="alert alert-danger">
+                <div *ngIf="Customer.errors.required">Customer is required.</div>
               </div>
             </div>
             <div class="col-xl-6">
@@ -162,7 +159,7 @@
                 </div>
               </div>
               <div *ngIf="dModel.invalid && (dModel.dirty || dModel.touched)" class="alert alert-danger">
-                <div *ngIf="dModel.errors.required">Shipment Date is required.</div>
+                <div *ngIf="dModel.errors.required">Code is required.</div>
               </div>
             </div>
             <div class="col-xl-12">
