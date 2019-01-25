@@ -1,0 +1,97 @@
+<div [@routerTransition]>
+  <div class="row" [hidden]="operation != 'view'"><app-shipment-list [list]="list" (notify)="open($event)"></app-shipment-list></div>
+  <form name="detailsForm" #detailsForm="ngForm" class="row" (ngSubmit)="save()" [hidden]="operation == 'view'" novalidate>
+    <div class="col col-sm-12">
+      <div class="card mb-3">
+        <div class="card-header">
+          <span [hidden]="operation != 'add'">Add New Make</span> <span [hidden]="operation != 'edit'">Edit {{ item?.Name }}</span>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-xl-6">
+              <label>Code <span class="text-danger">*</span>: </label>
+              <div class="form-group">
+                <input
+                  #Code="ngModel"
+                  name="Code"
+                  class="form-control"
+                  type="text"
+                  [(ngModel)]="item.Code"
+                  disabled
+                />
+              </div>
+            </div>
+            <div class="col-xl-6">
+              <ng-template #rt let-r="result" let-t="term"> <ngb-highlight [result]="r.Name" [term]="t"></ngb-highlight> </ng-template>
+              <label for="Organization">Organization <span class="text-danger">*</span>:</label>
+              <input
+                name="Organization"
+                type="text"
+                class="form-control"
+                [(ngModel)]="item.Organizations_Id"
+                [ngbTypeahead]="searchOrg"
+                (focus)="focus$.next($event.target.value)"
+                (click)="click$.next($event.target.value)"
+                #Organization="ngbTypeahead"
+                [resultTemplate]="rt"
+                [inputFormatter]="formatter"
+              />
+              <div *ngIf="Organization.invalid && (Organization.dirty || Organization.touched)" class="alert alert-danger">
+                <div *ngIf="Organization.errors.required">Organization is required.</div>
+              </div>
+            </div>
+            <div class="col-xl-6">
+                <ng-template #vrt let-r="result" let-t="term"> <ngb-highlight [result]="r.Name" [term]="t"></ngb-highlight> </ng-template>
+                <label for="Vendor">Vendor <span class="text-danger">*</span>:</label>
+                <input
+                  name="Vendor"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="item.Vendor_Id"
+                  [ngbTypeahead]="searchVend"
+                  (focus)="Vendorfocus$.next($event.target.value)"
+                  (click)="Vendorclick$.next($event.target.value)"
+                  #Vendor="ngbTypeahead"
+                  [resultTemplate]="vrt"
+                  [inputFormatter]="formatter"
+                />
+                <div *ngIf="Vendor.invalid && (Vendor.dirty || Vendor.touched)" class="alert alert-danger">
+                  <div *ngIf="Vendor.errors.required">Vendor is required.</div>
+                </div>
+              </div>
+              
+            <div class="col-xl-6">
+                <ng-template #crt let-r="result" let-t="term"> <ngb-highlight [result]="r.Name" [term]="t"></ngb-highlight> </ng-template>
+                <label for="Customer">Customer <span class="text-danger">*</span>:</label>
+                <input
+                  name="Customer"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="item.Customer_Id"
+                  [ngbTypeahead]="searchCustomer"
+                  (focus)="Customerfocus$.next($event.target.value)"
+                  (click)="Customerclick$.next($event.target.value)"
+                  #Customer="ngbTypeahead"
+                  [resultTemplate]="crt"
+                  [inputFormatter]="formatter"
+                />
+                <div *ngIf="Customer.invalid && (Customer.dirty || Customer.touched)" class="alert alert-danger">
+                  <div *ngIf="Customer.errors.required">Customer is required.</div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="text-right">
+            <button type="button" class="btn btn-default" (click)="back()">
+              <i class="fa fa-chevron-left" aria-hidden="true"></i> Back
+            </button>
+            <button class="btn btn-success" [disabled]="detailsForm.invalid" type="submit">
+              Save <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
