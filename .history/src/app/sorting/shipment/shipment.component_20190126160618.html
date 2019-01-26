@@ -1,0 +1,186 @@
+<div [@routerTransition]>
+  <div class="row" [hidden]="operation != 'view'"><app-shipment-list [list]="list" (notify)="open($event)"></app-shipment-list></div>
+  <form name="detailsForm" #detailsForm="ngForm" class="row" (ngSubmit)="save()" [hidden]="operation == 'view'" novalidate>
+    <div class="col col-sm-12">
+      <div class="card mb-3">
+        <div class="card-header">
+          <span [hidden]="operation != 'add'">Add New Shipment</span> <span [hidden]="operation != 'edit'">Edit {{ item?.Name }}</span>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col col-sm-12">
+              <div class="col-xl-6">
+                <label>Code <span class="text-danger">*</span>: </label>
+                <div class="form-group">
+                  <input #Code="ngModel" name="Code" class="form-control" type="text" [(ngModel)]="item.Code" readonly />
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-6">
+              <ng-template #rt let-r="result" let-t="term"> <ngb-highlight [result]="r.Name" [term]="t"></ngb-highlight> </ng-template>
+              <label for="Organization">Organization <span class="text-danger">*</span>:</label>
+              <input
+                name="Organization"
+                type="text"
+                class="form-control"
+                [(ngModel)]="item.Organizations_Id"
+                [ngbTypeahead]="searchOrg"
+                (focus)="focus$.next($event.target.value)"
+                (click)="click$.next($event.target.value)"
+                #Organization="ngbTypeahead"
+                [resultTemplate]="rt"
+                [inputFormatter]="formatter"
+                [editable]="false"
+              />
+              <div *ngIf="detailsForm.control['Organization'].invalid && (detailsForm.control['Organization'].dirty || detailsForm.control['Organization'].touched)" class="alert alert-danger">
+                <div *ngIf="detailsForm.control['Organization'].errors['required']">Organization is required.</div>
+              </div>
+            </div>
+            <div class="col-xl-6">
+              <ng-template #vrt let-r="result" let-t="term"> <ngb-highlight [result]="r.Name" [term]="t"></ngb-highlight> </ng-template>
+              <label for="Vendor">Vendor <span class="text-danger">*</span>:</label>
+              <input
+                name="Vendor"
+                type="text"
+                class="form-control"
+                [(ngModel)]="item.Vendor_Id"
+                [ngbTypeahead]="searchVend"
+                (focus)="Vendorfocus$.next($event.target.value)"
+                (click)="Vendorclick$.next($event.target.value)"
+                #Vendor="ngbTypeahead"
+                [resultTemplate]="vrt"
+                [inputFormatter]="formatter"
+              />
+              <div *ngIf="Vendor.invalid && (Vendor.dirty || Vendor.touched)" class="alert alert-danger">
+                <div *ngIf="Vendor.errors['required']">Vendor is required.</div>
+              </div>
+            </div>
+
+            <div class="col-xl-6">
+              <ng-template #crt let-r="result" let-t="term"> <ngb-highlight [result]="r.Name" [term]="t"></ngb-highlight> </ng-template>
+              <label for="Customer">Customer <span class="text-danger">*</span>:</label>
+              <input
+                name="Customer"
+                type="text"
+                class="form-control"
+                [(ngModel)]="item.Customer_Id"
+                [ngbTypeahead]="searchCustomer"
+                (selectItem)="selectedItem($event)"
+                (focus)="Customerfocus$.next($event.target.value)"
+                (click)="Customerclick$.next($event.target.value)"
+                #Customer="ngbTypeahead"
+                [resultTemplate]="crt"
+                [inputFormatter]="formatter"
+              />
+              <div *ngIf="Customer.invalid && (Customer.dirty || Customer.touched)" class="alert alert-danger">
+                <div *ngIf="Customer.errors['required']">Customer is required.</div>
+              </div>
+            </div>
+            <div class="col-xl-6">
+              <label>Address <span class="text-danger">*</span>: </label>
+              <div class="form-group">
+                <input #Address="ngModel" name="Address" class="form-control" type="text" [(ngModel)]="item.Address" readonly />
+              </div>
+            </div>
+            <div class="col-xl-6">
+              <ng-template #curt let-r="result" let-t="term"> <ngb-highlight [result]="r.Name" [term]="t"></ngb-highlight> </ng-template>
+              <label for="Currency">Currency <span class="text-danger">*</span>:</label>
+              <input
+                name="Currency"
+                type="text"
+                class="form-control"
+                [(ngModel)]="item.Currency_Id"
+                [ngbTypeahead]="searchCurrency"
+                (focus)="Currencyfocus$.next($event.target.value)"
+                (click)="Currencyclick$.next($event.target.value)"
+                #Currency="ngbTypeahead"
+                [resultTemplate]="curt"
+                [inputFormatter]="formatter"
+              />
+              <div *ngIf="Currency.invalid && (Currency.dirty || Currency.touched)" class="alert alert-danger">
+                <div *ngIf="Currency.errors['required']">Currency is required.</div>
+              </div>
+            </div>
+
+            <div class="col-xl-6">
+              <ng-template #prt let-r="result" let-t="term"> <ngb-highlight [result]="r.Name" [term]="t"></ngb-highlight> </ng-template>
+              <label for="Pay">Payment Methode <span class="text-danger">*</span>:</label>
+              <input
+                name="Pay"
+                type="text"
+                class="form-control"
+                [(ngModel)]="item.PaymentMethodes_Id"
+                [ngbTypeahead]="searchPay"
+                (focus)="payfocus$.next($event.target.value)"
+                (click)="payclick$.next($event.target.value)"
+                #pay="ngbTypeahead"
+                [resultTemplate]="prt"
+                [inputFormatter]="formatter"
+              />
+              <div *ngIf="pay.invalid && (pay.dirty || pay.touched)" class="alert alert-danger">
+                <div *ngIf="pay.errors['required']">Payment Methode is required.</div>
+              </div>
+            </div>
+            <div class="col-xl-6">
+              <label>Shipment Value <span class="text-danger">*</span>: </label>
+              <div class="form-group">
+                <input
+                  #ShipmentValue="ngModel"
+                  name="Shipment"
+                  class="form-control"
+                  type="number"
+                  required
+                  pattern="{{ patterns.Decimal }}"
+                  [(ngModel)]="item.ShipmentValue"
+                />
+              </div>
+              <div *ngIf="ShipmentValue.invalid && (ShipmentValue.dirty || ShipmentValue.touched)" class="alert alert-danger">
+                <div *ngIf="ShipmentValue.errors['required']">Shipment Value is required.</div>
+                <div *ngIf="ShipmentValue.errors['pattern']">Shipment Value is not valid.</div>
+              </div>
+            </div>
+            <div class="col-xl-6">
+              <label>Shipment Date <span class="text-danger">*</span>: </label>
+              <div class="form-group">
+                <div class="input-group datepicker-input">
+                  <input
+                    class="form-control"
+                    placeholder="yyyy-mm-dd"
+                    name="dp"
+                    [(ngModel)]="item.ShipmentDt"
+                    ngbDatepicker
+                    required
+                    #d="ngbDatepicker"
+                  />
+                  <button class="input-group-addon" (click)="d.toggle()" type="button">
+                    <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
+                    <span class="fa fa-calendar"></span>
+                  </button>
+                </div>
+                <div *ngIf="d.invalid && (d.dirty || d.touched)" class="alert alert-danger">
+                  <div *ngIf="d.errors['required']">Shipment Date is required.</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-12">
+              <label>Notes: </label>
+              <div class="form-group">
+                <textarea #Notes="ngModel" name="Notes" class="form-control" type="text" [(ngModel)]="item.Notes" rows="3"> </textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="text-right">
+            <button type="button" class="btn btn-default" (click)="back()">
+              <i class="fa fa-chevron-left" aria-hidden="true"></i> Back
+            </button>
+            <button class="btn btn-success" [disabled]="detailsForm.invalid" type="submit">
+              Save <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

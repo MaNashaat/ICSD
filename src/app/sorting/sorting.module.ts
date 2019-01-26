@@ -16,6 +16,7 @@ import { SidebarComponent } from '../layout/components/sidebar/sidebar.component
 import { SortingRoutingModule } from './sorting-routing.module';
 // import { PODComponent } from './POD/POD.component';
 import { TransactionComponent } from './transaction/transaction.component';
+import { TransactionListComponent } from './transaction/transaction-list/transaction-list.component';
 // import { ShipmentListComponent } from './shipment/shipment-list/shipment-list.component';
 
 
@@ -38,6 +39,7 @@ import { TransactionComponent } from './transaction/transaction.component';
     SidebarComponent,
     // PODComponent,
     TransactionComponent,
+    TransactionListComponent,
     // ShipmentListComponent
   ],
   // providers:[CountryService],
