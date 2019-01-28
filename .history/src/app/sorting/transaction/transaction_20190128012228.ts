@@ -5,7 +5,7 @@ export interface Transaction {
   DeliveryStatuses_Id?: number;
   Status?: string;
   IDTypes_Id?: number;
-  TransactionDt?: string;
+  TransactionDt?: Date;
   IDNum?: string;
   ReturnNote?: string;
   IsDelivered?: boolean;

@@ -9,13 +9,11 @@ import { Customer } from '../customer/customer';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerService } from '../customer/customer.service';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
-import { routerTransition } from 'src/app/router.animations';
 
 @Component({
   selector: 'app-transaction',
   templateUrl: './transaction.component.html',
-  styleUrls: ['./transaction.component.css'],
-  animations: [routerTransition()]
+  styleUrls: ['./transaction.component.css']
 })
 export class TransactionComponent implements OnInit, OnDestroy {
   @ViewChild('detailsForm')
@@ -108,6 +106,4 @@ export class TransactionComponent implements OnInit, OnDestroy {
 
     return day + '/' + month + '/' + year;
   }
-
-  search() {}
 }

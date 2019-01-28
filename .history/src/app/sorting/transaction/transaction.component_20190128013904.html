@@ -1,5 +1,5 @@
 <div [@routerTransition]>
-  <form name="detailsForm" #detailsForm="ngForm" class="row panel panel-body" (ngSubmit)="search()" novalidate id="collapseExample">
+  <form name="detailsForm" #detailsForm="ngForm" class="row" (ngSubmit)="search()" novalidate>
     <div class="col-xl-4">
       <ng-template #rt let-r="result" let-t="term"> <ngb-highlight [result]="r.Name" [term]="t"></ngb-highlight> </ng-template>
       <label for="Courier">Courier <span class="text-danger">*</span>:</label>
@@ -35,7 +35,6 @@
         [resultTemplate]="crt"
         [inputFormatter]="formatter"
         [editable]="false"
-        multiple
       />
       <!-- <div *ngIf="Organization.invalid && (Organization.dirty || Organization.touched)" class="alert alert-danger">
         <div *ngIf="Organization.errors['required']">Organization is required.</div>
@@ -59,30 +58,11 @@
     <div class="col-xl-4">
       <fieldset class="form-group">
         <label>Status</label>
-        <div>
-          <label class="radio-inline">
-            <input type="radio" name="Status" id="optionsRadiosInline1" [(ngModel)]="item.IsDelivered" value="1" checked="true" />Receive
-          </label>
-          <label class="radio-inline">
-            <input type="radio" name="Status" id="optionsRadiosInline2" [(ngModel)]="item.IsDelivered" value="2" />Return
-          </label>
-        </div>
+        <label class="radio-inline">
+          <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="1" checked="true" />Receive
+        </label>
+        <label class="radio-inline"> <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="2" />Return </label>
       </fieldset>
-    </div>
-    <div class="col-xl-4 offset-xl-4 text-right">
-        <br>
-      <button
-        class="btn btn-success"
-        [disabled]="detailsForm.invalid"
-        type="submit"
-        data-toggle="collapse"
-        href="#collapseExample"
-        role="button"
-        aria-expanded="true"
-        aria-controls="collapseExample"
-      >
-        Search <i class="fa fa-search" aria-hidden="true"></i>
-      </button>
     </div>
   </form>
   <div class="row"><app-transaction-list></app-transaction-list></div>

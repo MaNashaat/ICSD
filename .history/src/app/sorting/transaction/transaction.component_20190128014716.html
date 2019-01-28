@@ -1,5 +1,5 @@
 <div [@routerTransition]>
-  <form name="detailsForm" #detailsForm="ngForm" class="row panel panel-body" (ngSubmit)="search()" novalidate id="collapseExample">
+  <form name="detailsForm" #detailsForm="ngForm" class="row" (ngSubmit)="search()" novalidate>
     <div class="col-xl-4">
       <ng-template #rt let-r="result" let-t="term"> <ngb-highlight [result]="r.Name" [term]="t"></ngb-highlight> </ng-template>
       <label for="Courier">Courier <span class="text-danger">*</span>:</label>
@@ -61,28 +61,13 @@
         <label>Status</label>
         <div>
           <label class="radio-inline">
-            <input type="radio" name="Status" id="optionsRadiosInline1" [(ngModel)]="item.IsDelivered" value="1" checked="true" />Receive
+            <input type="radio" name="Status" id="optionsRadiosInline1" [(ngModel)]="item.Status" value="1" checked="true" />Receive
           </label>
           <label class="radio-inline">
-            <input type="radio" name="Status" id="optionsRadiosInline2" [(ngModel)]="item.IsDelivered" value="2" />Return
+            <input type="radio" name="Status" id="optionsRadiosInline2" [(ngModel)]="item.Status" value="2" />Return
           </label>
         </div>
       </fieldset>
-    </div>
-    <div class="col-xl-4 offset-xl-4 text-right">
-        <br>
-      <button
-        class="btn btn-success"
-        [disabled]="detailsForm.invalid"
-        type="submit"
-        data-toggle="collapse"
-        href="#collapseExample"
-        role="button"
-        aria-expanded="true"
-        aria-controls="collapseExample"
-      >
-        Search <i class="fa fa-search" aria-hidden="true"></i>
-      </button>
     </div>
   </form>
   <div class="row"><app-transaction-list></app-transaction-list></div>

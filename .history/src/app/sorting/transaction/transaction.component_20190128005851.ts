@@ -9,13 +9,11 @@ import { Customer } from '../customer/customer';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerService } from '../customer/customer.service';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
-import { routerTransition } from 'src/app/router.animations';
 
 @Component({
   selector: 'app-transaction',
   templateUrl: './transaction.component.html',
-  styleUrls: ['./transaction.component.css'],
-  animations: [routerTransition()]
+  styleUrls: ['./transaction.component.css']
 })
 export class TransactionComponent implements OnInit, OnDestroy {
   @ViewChild('detailsForm')
@@ -58,7 +56,6 @@ export class TransactionComponent implements OnInit, OnDestroy {
   constructor(public patterns: PatternsService, private _Service: TransactionService, private _CustomerService: CustomerService) {}
 
   ngOnInit(): void {
-    this.item = { ID: 0, TransactionDt: this.formatDate(new Date()) };
     this.CourierLstSub = this._CustomerService.getItemsSimple(0).subscribe(result => (this.CourierLst = result));
     this.CustomerLstSub = this._CustomerService.getItemsSimple(1).subscribe(result => (this.CustomerLst = result));
   }
@@ -85,29 +82,4 @@ export class TransactionComponent implements OnInit, OnDestroy {
       )
     );
   }
-
-  searchCust = (text$: Observable<string>) => {
-    const debouncedText$ = text$.pipe(
-      debounceTime(200),
-      distinctUntilChanged()
-    );
-    const clicksWithClosedPopup$ = this.Customerclick$.pipe(filter(() => !this.Customer.isPopupOpen()));
-    const inputFocus$ = this.focus$;
-
-    return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      map(term =>
-        (term === '' ? this.CustomerLst : this.CustomerLst.filter(v => v.Name.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10)
-      )
-    );
-  }
-
-  formatDate(date) {
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-
-    return day + '/' + month + '/' + year;
-  }
-
-  search() {}
 }

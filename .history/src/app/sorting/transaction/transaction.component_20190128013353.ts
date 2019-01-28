@@ -108,6 +108,4 @@ export class TransactionComponent implements OnInit, OnDestroy {
 
     return day + '/' + month + '/' + year;
   }
-
-  search() {}
 }

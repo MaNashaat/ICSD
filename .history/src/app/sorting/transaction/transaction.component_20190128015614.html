@@ -1,5 +1,5 @@
 <div [@routerTransition]>
-  <form name="detailsForm" #detailsForm="ngForm" class="row panel panel-body" (ngSubmit)="search()" novalidate id="collapseExample">
+  <form name="detailsForm" #detailsForm="ngForm" class="row" (ngSubmit)="search()" novalidate id="collapseExample">
     <div class="col-xl-4">
       <ng-template #rt let-r="result" let-t="term"> <ngb-highlight [result]="r.Name" [term]="t"></ngb-highlight> </ng-template>
       <label for="Courier">Courier <span class="text-danger">*</span>:</label>
@@ -69,8 +69,7 @@
         </div>
       </fieldset>
     </div>
-    <div class="col-xl-4 offset-xl-4 text-right">
-        <br>
+    <div class="col-xl-4">
       <button
         class="btn btn-success"
         [disabled]="detailsForm.invalid"
@@ -81,7 +80,7 @@
         aria-expanded="true"
         aria-controls="collapseExample"
       >
-        Search <i class="fa fa-search" aria-hidden="true"></i>
+        Search <i class="fa fa-floppy-o" aria-hidden="true"></i>
       </button>
     </div>
   </form>

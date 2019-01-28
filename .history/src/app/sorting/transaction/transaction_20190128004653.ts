@@ -2,13 +2,17 @@ import { Customer } from '../customer/customer';
 
 export interface Transaction {
   ID: number;
+  Organizations_Id?: number;
   DeliveryStatuses_Id?: number;
   Status?: string;
   IDTypes_Id?: number;
-  TransactionDt?: string;
+  TransactionDt?: Date;
   IDNum?: string;
   ReturnNote?: string;
   IsDelivered?: boolean;
+  FromDt?: Date;
+  ToDt?: Date;
+  Couriers_Id: number;
   Courier?: Customer;
-  Customers?: Customer[];
+  Customer?: Customer[];
 }

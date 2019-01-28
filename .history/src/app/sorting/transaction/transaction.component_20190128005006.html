@@ -1,0 +1,69 @@
+<div [@routerTransition]>
+  <div class="row">
+    <div class="col-xl-4">
+      <ng-template #rt let-r="result" let-t="term"> <ngb-highlight [result]="r.Name" [term]="t"></ngb-highlight> </ng-template>
+      <label for="Organization">Courier <span class="text-danger">*</span>:</label>
+      <input
+        name="Organization"
+        type="text"
+        class="form-control"
+        [(ngModel)]="Cour"
+        [ngbTypeahead]="searchCour"
+        (focus)="focus$.next($event.target.value)"
+        (click)="click$.next($event.target.value)"
+        #Organization="ngbTypeahead"
+        [resultTemplate]="rt"
+        [inputFormatter]="formatter"
+        [editable]="false"
+      />
+      <!-- <div *ngIf="Organization.invalid && (Organization.dirty || Organization.touched)" class="alert alert-danger">
+        <div *ngIf="Organization.errors['required']">Organization is required.</div>
+      </div> -->
+    </div>
+    <div class="col-xl-4">
+      <ng-template #rt let-r="result" let-t="term"> <ngb-highlight [result]="r.Name" [term]="t"></ngb-highlight> </ng-template>
+      <label for="Organization">Organization <span class="text-danger">*</span>:</label>
+      <input
+        name="Organization"
+        type="text"
+        class="form-control"
+        [(ngModel)]="Org"
+        [ngbTypeahead]="searchOrg"
+        (focus)="focus$.next($event.target.value)"
+        (click)="click$.next($event.target.value)"
+        #Organization="ngbTypeahead"
+        [resultTemplate]="rt"
+        [inputFormatter]="formatter"
+        [editable]="false"
+      />
+      <div *ngIf="Organization.invalid && (Organization.dirty || Organization.touched)" class="alert alert-danger">
+        <div *ngIf="Organization.errors['required']">Organization is required.</div>
+      </div>
+    </div>
+    <div class="col-xl-4">
+      <label>Transaction Date <span class="text-danger">*</span>: </label>
+      <div class="form-group">
+        <div class="input-group datepicker-input">
+          <input
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="TransactionDt"
+            [(ngModel)]="item.TransactionDt"
+            #TransactionDt="ngModel"
+            readonly
+          />
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4">
+      <fieldset class="form-group">
+        <label>Status</label>
+        <label class="radio-inline">
+          <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="1" checked="true" />Receive
+        </label>
+        <label class="radio-inline"> <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="2" />Return </label>
+      </fieldset>
+    </div>
+  </div>
+  <div class="row"><app-transaction-list></app-transaction-list></div>
+</div>
