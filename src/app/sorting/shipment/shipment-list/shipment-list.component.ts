@@ -20,7 +20,6 @@ export class ShipmentListComponent implements OnInit, AfterViewInit {
 
 
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-
       this._Service.getAll().subscribe(list => {
         this.list = list;
         this.refreshDataSource(this.list);
@@ -60,7 +59,8 @@ export class ShipmentListComponent implements OnInit, AfterViewInit {
   }
 
   delete = function (id: number) {
-    this._service.remove(id).subscribe(result => {
+    debugger
+    this._Service.remove(id).subscribe(result => {
       const filterResult = this.list.filter(function (element, index, array) {
         return element.ID === id;
       });

@@ -25,6 +25,7 @@ export class ShipmentService {
   }
 
   remove(id): Observable<boolean> {
+    debugger
     return <Observable<boolean>>this._http.post(environment.apiURL + 'Shipment/Delete', id );
   }
 }
