@@ -11,6 +11,8 @@ import { ShipmentRoutingModule } from './shipment-routing.module';
 import { ShipmentListComponent } from './shipment-list/shipment-list.component';
 import { NgbTypeaheadModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { FileUploadModule } from 'ng2-file-upload';
 @NgModule({
   imports: [
     ReactiveFormsModule,
@@ -19,6 +21,8 @@ import { NgbTypeaheadModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootst
     ShipmentRoutingModule,
     DataTablesModule,
     PageHeaderModule,
+    FileUploadModule ,
+    AngularMultiSelectModule,
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger' // set defaults here
     }),

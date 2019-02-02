@@ -17,6 +17,9 @@ import { Currency } from 'src/app/shared/entities/currency';
 import { CurrencyService } from 'src/app/shared/services/currency.service';
 import { PaymentMethode } from 'src/app/shared/entities/payment-methode';
 import { PaymentMethodeService } from 'src/app/shared/services/payment-methode.service';
+import { FileUploader } from 'ng2-file-upload';
+import { environment } from '../../../environments/environment';
+const URL = environment.apiURL + 'Shipment/Upload';
 
 @Component({
   selector: 'app-shipment',
@@ -25,12 +28,26 @@ import { PaymentMethodeService } from 'src/app/shared/services/payment-methode.s
   animations: [routerTransition()]
 })
 export class ShipmentComponent implements OnInit, OnDestroy {
+
   @ViewChild('detailsForm')
   public detailsForm: NgForm;
   operation = 'view';
   item: Shipment;
   list: Shipment[];
   shipLstSub: Subscription;
+  Custsettings = {};
+  Orgsettings = {};
+  Vendorsettings = {};
+  Currencysettings = {};
+  paysettings = {};
+
+  // selectedCustomer = [];
+  // selectedOrg = [];
+  // selectedVendor = [];
+  // selectedCurrency = [];
+  // selectedPay = [];
+
+
 
   orgLst: Organization[] = [];
   orgLstSub: Subscription;
@@ -129,7 +146,7 @@ export class ShipmentComponent implements OnInit, OnDestroy {
     private _CustomerService: CustomerService,
     private _CurrencyService: CurrencyService,
     private _PayService: PaymentMethodeService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.shipLstSub = this._Service.getAll().subscribe(list => {
@@ -142,6 +159,61 @@ export class ShipmentComponent implements OnInit, OnDestroy {
     this.payLstSub = this._PayService.getAll().subscribe(result => (this.payLst = result));
 
     this.item = { ID: 0, Code: '', ShipmentDt: null, ShipmentValue: 0 };
+
+    this.Custsettings = {
+      singleSelection: true,
+      text: 'Select Cutomers',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      enableSearchFilter: true,
+      badgeShowLimit: 3,
+      labelKey: 'NameEn',
+      primaryKey: 'ID'
+    };
+    this.Orgsettings = {
+      singleSelection: true,
+      text: 'Select Organization',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      enableSearchFilter: true,
+      badgeShowLimit: 3,
+      labelKey: 'NameEn',
+      primaryKey: 'ID'
+    };
+
+    this.Vendorsettings = {
+      singleSelection: true,
+      text: 'Select Vendor',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      enableSearchFilter: true,
+      badgeShowLimit: 3,
+      labelKey: 'NameEn',
+      primaryKey: 'ID'
+    };
+    this.paysettings = {
+      singleSelection: true,
+      text: 'Select Payment Method',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      enableSearchFilter: true,
+      badgeShowLimit: 3,
+      labelKey: 'NameEn',
+      primaryKey: 'ID'
+    };
+    this.Currencysettings = {
+      singleSelection: true,
+      text: 'Select Currency',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      enableSearchFilter: true,
+      badgeShowLimit: 3,
+      labelKey: 'NameEn',
+      primaryKey: 'ID'
+    };
+
+
+    
   }
 
   ngOnDestroy(): void {
@@ -198,7 +270,7 @@ export class ShipmentComponent implements OnInit, OnDestroy {
   }
 
   selectedItem(item) {
-    this._CustomerService.getDefaultAddressByCustomer(item.item.ID).subscribe(result => {
+    this._CustomerService.getDefaultAddressByCustomer(item.ID).subscribe(result => {
       if (result != null) {
         this.item.Address = result.Address;
         this.item.CustomerAddresses_Id = result.ID;
@@ -237,7 +309,8 @@ export class ShipmentComponent implements OnInit, OnDestroy {
     );
   }
 
-  open = function(_item: any) {
+  open = function (_item: any) {
+    debugger;
     this.detailsForm.reset();
     this.operation = _item == null ? 'add' : 'edit';
     switch (this.operation) {
@@ -246,20 +319,31 @@ export class ShipmentComponent implements OnInit, OnDestroy {
         break;
       case 'edit':
         this.item = Object.assign({}, _item);
+        this.item.Customer = this.item.Customer == null ? [] : [this.item.Customer];
+        this.item.PaymentMethode = this.item.PaymentMethode == null ? [] : [this.item.PaymentMethode];
+        this.item.Currency = this.item.Currency == null ? [] : [this.item.Currency];
+        this.item.Vendor = this.item.Vendor == null ? [] : [this.item.Vendor];
+        this.item.Organization = this.item.Organization == null ? [] : [this.item.Organization];
         break;
     }
   };
 
-  back = function() {
+  back = function () {
     if (this.operation !== 'view') {
       this.operation = 'view';
     }
   };
 
-  save = function() {
+  save = function () {
+    this.item.Customer = this.item.Customer[0];
+    this.item.PaymentMethode = this.item.PaymentMethode[0];
+    this.item.Currency = this.item.Currency[0];
+    this.item.Vendor = this.item.Vendor[0];
+    this.item.Organization = this.item.Organization[0];
+
     this._Service.save(this.item).subscribe(result => {
       if (result != null && result !== undefined) {
-        const filterResult = this.list.filter(function(element, index, array) {
+        const filterResult = this.list.filter(function (element, index, array) {
           return element.ID === result.ID;
         });
         if (filterResult.length === 0) {

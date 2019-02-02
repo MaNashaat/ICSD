@@ -1,138 +1,86 @@
 <div [@routerTransition]>
-  <div class="row" [hidden]="operation != 'view'"><app-shipment-list [list]="list" (notify)="open($event)"></app-shipment-list></div>
+  <div class="row" [hidden]="operation != 'view'">
+    <app-shipment-list [list]="list" (notify)="open($event)"></app-shipment-list>
+  </div>
   <form name="detailsForm" #detailsForm="ngForm" class="row" (ngSubmit)="save()" [hidden]="operation == 'view'" novalidate>
     <div class="col col-sm-12">
       <div class="card mb-3">
         <div class="card-header">
-          <span [hidden]="operation != 'add'">Add New Shipment</span> <span [hidden]="operation != 'edit'">Edit {{ item?.Name }}</span>
+          <span [hidden]="operation != 'add'">Add New Shipment</span>
+          <span [hidden]="operation != 'edit'">Edit {{ item?.Name }}</span>
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col col-sm-12">
-              <div class="col-xl-6">
-                <label>Code <span class="text-danger">*</span>: </label>
-                <div class="form-group">
-                  <input #Code="ngModel" name="Code" class="form-control" type="text" [(ngModel)]="item.Code" readonly />
-                </div>
+            <div class="col-xl-6">
+              <label>Code
+                <span class="text-danger">*</span>: </label>
+              <div class="form-group">
+                <input #Code="ngModel" name="Code" class="form-control" type="text" [(ngModel)]="item.Code" readonly />
               </div>
+
             </div>
             <div class="col-xl-6">
-              <ng-template #rt let-r="result" let-t="term"> <ngb-highlight [result]="r.Name" [term]="t"></ngb-highlight> </ng-template>
-              <label for="Organization">Organization <span class="text-danger">*</span>:</label>
-              <input
-                name="Organization"
-                type="text"
-                class="form-control"
-                [(ngModel)]="Org"
-                [ngbTypeahead]="searchOrg"
-                (focus)="focus$.next($event.target.value)"
-                (click)="click$.next($event.target.value)"
-                #Organization="ngbTypeahead"
-                [resultTemplate]="rt"
-                [inputFormatter]="formatter"
-                [editable]="false"
-              />
+              <label for="Organization">Organization
+                <span class="text-danger">*</span>:</label>
+              <angular2-multiselect name="Organization" #Organization="ngModel" required [data]="orgLst" [(ngModel)]="item.Organization"
+                [settings]="Orgsettings">
+              </angular2-multiselect>
               <div *ngIf="Organization.invalid && (Organization.dirty || Organization.touched)" class="alert alert-danger">
                 <div *ngIf="Organization.errors['required']">Organization is required.</div>
               </div>
             </div>
             <div class="col-xl-6">
-              <ng-template #vrt let-r="result" let-t="term"> <ngb-highlight [result]="r.Name" [term]="t"></ngb-highlight> </ng-template>
-              <label for="Vendor">Vendor <span class="text-danger">*</span>:</label>
-              <input
-                name="Vendor"
-                type="text"
-                class="form-control"
-                [(ngModel)]="Vnd"
-                [ngbTypeahead]="searchVend"
-                (focus)="Vendorfocus$.next($event.target.value)"
-                (click)="Vendorclick$.next($event.target.value)"
-                #Vendor="ngbTypeahead"
-                [resultTemplate]="vrt"
-                [inputFormatter]="formatter"
-              />
+              <label for="Vendor">Vendor
+                <span class="text-danger">*</span>:</label>
+              <angular2-multiselect name="Vendor" #Vendor="ngModel" required [data]="vendorLst" [(ngModel)]="item.Vendor" [settings]="Vendorsettings">
+              </angular2-multiselect>
               <div *ngIf="Vendor.invalid && (Vendor.dirty || Vendor.touched)" class="alert alert-danger">
                 <div *ngIf="Vendor.errors['required']">Vendor is required.</div>
               </div>
             </div>
 
             <div class="col-xl-6">
-              <ng-template #crt let-r="result" let-t="term"> <ngb-highlight [result]="r.Name" [term]="t"></ngb-highlight> </ng-template>
-              <label for="Customer">Customer <span class="text-danger">*</span>:</label>
-              <input
-                name="Customer"
-                type="text"
-                class="form-control"
-                [(ngModel)]="Cust"
-                [ngbTypeahead]="searchCustomer"
-                (selectItem)="selectedItem($event)"
-                (focus)="Customerfocus$.next($event.target.value)"
-                (click)="Customerclick$.next($event.target.value)"
-                #Customer="ngbTypeahead"
-                [resultTemplate]="crt"
-                [inputFormatter]="formatter"
-              />
+              <label for="Customer">Customer
+                <span class="text-danger">*</span>:</label>
+              <angular2-multiselect name="Customer" #Customer="ngModel" required [data]="customerLst" [(ngModel)]="item.Customer" [settings]="Custsettings"
+                (onSelect)="selectedItem($event)">
+              </angular2-multiselect>
               <div *ngIf="Customer.invalid && (Customer.dirty || Customer.touched)" class="alert alert-danger">
                 <div *ngIf="Customer.errors['required']">Customer is required.</div>
               </div>
             </div>
             <div class="col-xl-6">
-              <label>Address <span class="text-danger">*</span>: </label>
+              <label>Address
+                <span class="text-danger">*</span>: </label>
               <div class="form-group">
                 <input #Address="ngModel" name="Address" class="form-control" type="text" [(ngModel)]="item.Address" readonly />
               </div>
             </div>
             <div class="col-xl-6">
-              <ng-template #curt let-r="result" let-t="term"> <ngb-highlight [result]="r.Name" [term]="t"></ngb-highlight> </ng-template>
-              <label for="Currency">Currency <span class="text-danger">*</span>:</label>
-              <input
-                name="Currency"
-                type="text"
-                class="form-control"
-                [(ngModel)]="Curr"
-                [ngbTypeahead]="searchCurrency"
-                (focus)="Currencyfocus$.next($event.target.value)"
-                (click)="Currencyclick$.next($event.target.value)"
-                #Currency="ngbTypeahead"
-                [resultTemplate]="curt"
-                [inputFormatter]="formatter"
-              />
+              <label for="Currency">Currency
+                <span class="text-danger">*</span>:</label>
+              <angular2-multiselect name="Currency" #Currency="ngModel" required [data]="currencyLst" [(ngModel)]="item.Currency" [settings]="Currencysettings">
+              </angular2-multiselect>
               <div *ngIf="Currency.invalid && (Currency.dirty || Currency.touched)" class="alert alert-danger">
                 <div *ngIf="Currency.errors['required']">Currency is required.</div>
               </div>
             </div>
 
             <div class="col-xl-6">
-              <ng-template #prt let-r="result" let-t="term"> <ngb-highlight [result]="r.Name" [term]="t"></ngb-highlight> </ng-template>
-              <label for="Pay">Payment Methode <span class="text-danger">*</span>:</label>
-              <input
-                name="Pay"
-                type="text"
-                class="form-control"
-                [(ngModel)]="PayMethode"
-                [ngbTypeahead]="searchPay"
-                (focus)="payfocus$.next($event.target.value)"
-                (click)="payclick$.next($event.target.value)"
-                #pay="ngbTypeahead"
-                [resultTemplate]="prt"
-                [inputFormatter]="formatter"
-              />
+              <label for="Pay">Payment Methode
+                <span class="text-danger">*</span>:</label>
+              <angular2-multiselect name="pay" #pay="ngModel" required [data]="payLst" [(ngModel)]="item.PaymentMethode" [settings]="paysettings">
+              </angular2-multiselect>
               <div *ngIf="pay.invalid && (pay.dirty || pay.touched)" class="alert alert-danger">
                 <div *ngIf="pay.errors['required']">Payment Methode is required.</div>
               </div>
             </div>
             <div class="col-xl-6">
-              <label>Shipment Value <span class="text-danger">*</span>: </label>
+              <label>Shipment Value
+                <span class="text-danger">*</span>: </label>
               <div class="form-group">
-                <input
-                  #ShipmentValue="ngModel"
-                  name="Shipment"
-                  class="form-control"
-                  type="number"
-                  required
-                  pattern="{{ patterns.Decimal }}"
-                  [(ngModel)]="item.ShipmentValue"
-                />
+                <input #ShipmentValue="ngModel" name="Shipment" class="form-control" type="number" required pattern="{{ patterns.Decimal }}"
+                  [(ngModel)]="item.ShipmentValue" />
               </div>
               <div *ngIf="ShipmentValue.invalid && (ShipmentValue.dirty || ShipmentValue.touched)" class="alert alert-danger">
                 <div *ngIf="ShipmentValue.errors['required']">Shipment Value is required.</div>
@@ -140,19 +88,12 @@
               </div>
             </div>
             <div class="col-xl-6">
-              <label>Shipment Date <span class="text-danger">*</span>: </label>
+              <label>Shipment Date
+                <span class="text-danger">*</span>: </label>
               <div class="form-group">
                 <div class="input-group datepicker-input">
-                  <input
-                    class="form-control"
-                    placeholder="yyyy-mm-dd"
-                    name="dp"
-                    [(ngModel)]="item.ShipmentDt"
-                    ngbDatepicker
-                    required
-                    #d="ngbDatepicker"
-                    #ShipmentDt="ngModel"
-                  />
+                  <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="item.ShipmentDt" ngbDatepicker required #d="ngbDatepicker"
+                    #ShipmentDt="ngModel" />
                   <button class="input-group-addon" (click)="d.toggle()" type="button">
                     <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
                     <span class="fa fa-calendar"></span>
@@ -177,7 +118,8 @@
               <i class="fa fa-chevron-left" aria-hidden="true"></i> Back
             </button>
             <button class="btn btn-success" [disabled]="detailsForm.invalid" type="submit">
-              Save <i class="fa fa-floppy-o" aria-hidden="true"></i>
+              Save
+              <i class="fa fa-floppy-o" aria-hidden="true"></i>
             </button>
           </div>
         </div>
