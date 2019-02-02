@@ -1,0 +1,50 @@
+<div class="col col-sm-12">
+  <div class="card mb-3">
+    <div class="card-header">Transaction</div>
+    <div class="card-body">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped row-border hover">
+        <thead id="table">
+          <tr>
+            <th>Code</th>
+            <th>Organization</th>
+            <th>Vendor</th>
+            <th>Courier</th>
+            <th>Customer</th>
+            <th *ngIf="!isDelivered">Return Reason</th>
+            <th *ngIf="!isDelivered">Notes</th>
+            <th *ngIf="isDelivered">Delivered Person</th>
+            <th *ngIf="isDelivered">ID Types</th>
+            <th *ngIf="isDelivered">ID Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let _item of list">
+            <td>{{ _item.Shipments_Code }}</td>
+            <td>{{ _item.Organizations_Name }}</td>
+            <td>{{ _item.Vendors_Name }}</td>
+            <td>{{ _item.Couriers_Name }}</td>
+            <td>{{ _item.Customers_Name }}</td>
+            <td *ngIf="!isDelivered"></td>
+            <td *ngIf="!isDelivered"></td>
+            <td *ngIf="isDelivered">
+              <div class="form-group">
+                <form autocomplete="off">
+                  <input
+                    class="form-control"
+                    type="text"
+                    autocomplete
+                    [config]="config2"
+                    [items]="deliverypersons"
+                    autocomplete="off"
+                  />
+                </form>
+              </div>
+            </td>
+            <td *ngIf="isDelivered"></td>
+            <td *ngIf="isDelivered"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

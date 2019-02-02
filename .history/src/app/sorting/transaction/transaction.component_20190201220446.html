@@ -1,0 +1,89 @@
+<div [@routerTransition]>
+  <form name="detailsForm" #detailsForm="ngForm" class="row panel panel-body" (ngSubmit)="search()" novalidate id="collapseExample">
+    <div class="col-xl-4">
+      <ng-template #rt let-r="result" let-t="term"> <ngb-highlight [result]="r.Name" [term]="t"></ngb-highlight> </ng-template>
+      <label for="Courier">Courier <span class="text-danger">*</span>:</label>
+      <input
+        name="Courier"
+        type="text"
+        class="form-control"
+        [(ngModel)]="Cour"
+        [ngbTypeahead]="searchCour"
+        (focus)="focus$.next($event.target.value)"
+        (click)="click$.next($event.target.value)"
+        #Courier="ngbTypeahead"
+        [resultTemplate]="rt"
+        [inputFormatter]="formatter"
+        [editable]="false"
+      />
+      <!-- <div *ngIf="Organization.invalid && (Organization.dirty || Organization.touched)" class="alert alert-danger">
+        <div *ngIf="Organization.errors['required']">Organization is required.</div>
+      </div> -->
+    </div>
+    <div class="col-xl-4">
+      <ng-template #crt let-r="result" let-t="term"> <ngb-highlight [result]="r.Name" [term]="t"></ngb-highlight> </ng-template>
+      <label for="Customer">Cusomers <span class="text-danger">*</span>:</label>
+      <input
+        name="Customer"
+        type="text"
+        class="form-control"
+        [(ngModel)]="Cust"
+        [ngbTypeahead]="searchCust"
+        (focus)="Customerfocus$.next($event.target.value)"
+        (click)="Customerclick$.next($event.target.value)"
+        #Customer="ngbTypeahead"
+        [resultTemplate]="crt"
+        [inputFormatter]="formatter"
+        [editable]="false"
+        multiple
+      />
+      <!-- <div *ngIf="Organization.invalid && (Organization.dirty || Organization.touched)" class="alert alert-danger">
+        <div *ngIf="Organization.errors['required']">Organization is required.</div>
+      </div> -->
+    </div>
+    <div class="col-xl-4">
+      <label>Transaction Date <span class="text-danger">*</span>: </label>
+      <div class="form-group">
+        <div class="input-group datepicker-input">
+          <input
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="TransactionDt"
+            [(ngModel)]="item.TransactionDt"
+            #TransactionDt="ngModel"
+            readonly
+          />
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4">
+      <fieldset class="form-group">
+        <label>Status</label>
+        <div>
+          <label class="radio-inline">
+            <input type="radio" name="Status" id="optionsRadiosInline1" [(ngModel)]="item.IsDelivered" value="1" checked="true" />Receive
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="Status" id="optionsRadiosInline2" [(ngModel)]="item.IsDelivered" value="2" />Return
+          </label>
+        </div>
+      </fieldset>
+    </div>
+    <div class="col-xl-4 offset-xl-4 text-right">
+      <br />
+      <button
+        class="btn btn-success"
+        [disabled]="detailsForm.invalid"
+        type="submit"
+        data-toggle="collapse"
+        href="#collapseExample"
+        role="button"
+        aria-expanded="true"
+        aria-controls="collapseExample"
+      >
+        Search <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
+    </div>
+  </form>
+  <div class="row"><app-transaction-list [isDelivered]="item.IsDelivered" [list]="list"></app-transaction-list></div>
+</div>
