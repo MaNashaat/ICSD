@@ -68,18 +68,8 @@
               </div> -->
             </td>
             <td *ngIf="isDelivered">
-                <angular2-multiselect
-                name="IDTypes"
-                #Courier="ngModel"
-                required
-                [data]="IDTypes"
-                [(ngModel)]="_item.Transaction.DeliveryStatuses_Id"
-                [settings]="IDTypeSeting"
-                >
-              </angular2-multiselect>
-<!-- 
               <div class="form-group"><input class="form-control" type="text" autocomplete [config]="config3" [items]="IDTypes"  [(ngModel)]="_item.Transaction.IDTypes_Id" />
-              </div> -->
+              </div>
             </td>
             <td *ngIf="isDelivered"><input class="form-control" type="text" [(ngModel)]="_item.Transaction.IDNum" /></td>
           </tr>

@@ -18,9 +18,10 @@ export class ShipmentService {
     return <Observable<Shipment[]>>this._http.get(environment.apiURL + 'Shipment/GetAllByDate');
   }
 
-  getFiltered(trans): Observable<Shipment[]> {
-    return <Observable<Shipment[]>>this._http.post(environment.apiURL + 'Shipment/GetFiltered', trans);
+  getFiltered(): Observable<Shipment[]> {
+    return <Observable<Shipment[]>>this._http.get(environment.apiURL + 'Shipment/GetFiltered');
   }
+
 
   getAllSimple(selectedShipment): Observable<Shipment[]> {
     return <Observable<Shipment[]>>this._http.get(environment.apiURL + 'Shipment/GetAllSimple');

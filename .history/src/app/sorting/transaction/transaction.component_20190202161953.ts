@@ -45,11 +45,6 @@ export class TransactionComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.transLstSub = this._ShipmentService.getAllByDate().subscribe(result => {
       this.list = result;
-      this.list.forEach(x => {
-        if (!x.Transaction) {
-          x.Transaction = { ID: 0, DeliveryStatuses_Id: null, IDNum: '', IDTypes_Id: null, Notes: '' };
-        }
-      });
     });
     this.transSC = { TransactionDt: this.formatDate(new Date()), IsDelivered: true };
 

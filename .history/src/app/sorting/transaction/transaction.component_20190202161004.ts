@@ -45,11 +45,6 @@ export class TransactionComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.transLstSub = this._ShipmentService.getAllByDate().subscribe(result => {
       this.list = result;
-      this.list.forEach(x => {
-        if (!x.Transaction) {
-          x.Transaction = { ID: 0, DeliveryStatuses_Id: null, IDNum: '', IDTypes_Id: null, Notes: '' };
-        }
-      });
     });
     this.transSC = { TransactionDt: this.formatDate(new Date()), IsDelivered: true };
 
@@ -103,20 +98,9 @@ export class TransactionComponent implements OnInit, OnDestroy {
     });
   }
   save() {
-    const transactionlst: Transaction[] = [];
-    this.list.forEach(p => {
-      transactionlst.push({
-        ID: p.Transaction.ID,
-        IsDelivered: this.transSC.IsDelivered,
-        Shipments_Id: p.ID,
-        DeliveryStatuses_Id: p.Transaction.DeliveryStatuses_Id,
-        IDTypes_Id: p.Transaction.IDTypes_Id,
-        IDNum: p.Transaction.IDNum,
-        Notes: p.Transaction.Notes
-      });
-    });
+    let transactionlst: Transaction[] = [];
 
-    /* transactionlst = this.list.map<Transaction>(p => ({
+    transactionlst = this.list.map<Transaction>(p => ({
       ID: p.Transaction.ID,
       IsDelivered: this.transSC.IsDelivered,
       Shipments_Id: p.ID,
@@ -124,7 +108,7 @@ export class TransactionComponent implements OnInit, OnDestroy {
       IDTypes_Id: p.Transaction.IDTypes_Id,
       IDNum: p.Transaction.IDNum,
       Notes: p.Transaction.Notes
-    })); */
+    }));
     this._Service.save(transactionlst).subscribe(result => {
       this.list = [];
     });

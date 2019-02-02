@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { PatternsService } from 'src/app/shared/services/patterns.service';
 import { TransactionService } from './transaction.service';
 import { Subscription } from 'rxjs';
-import { TransactionSC, Transaction } from './transaction';
+import { TransactionSC } from './transaction';
 import { NgForm } from '@angular/forms';
 import { Customer } from '../customer/customer';
 import { CustomerService } from '../customer/customer.service';
@@ -45,13 +45,8 @@ export class TransactionComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.transLstSub = this._ShipmentService.getAllByDate().subscribe(result => {
       this.list = result;
-      this.list.forEach(x => {
-        if (!x.Transaction) {
-          x.Transaction = { ID: 0, DeliveryStatuses_Id: null, IDNum: '', IDTypes_Id: null, Notes: '' };
-        }
-      });
     });
-    this.transSC = { TransactionDt: this.formatDate(new Date()), IsDelivered: true };
+    this.transSC = { Courier: { ID: 0, Name: '' }, Customers: [{ ID: 0, Name: '' }], TransactionDt: this.formatDate(new Date()) };
 
     this.CourierLstSub = this._CustomerService.getItemsSimple(0).subscribe(result => (this.CourierLst = result));
     this.CustomerLstSub = this._CustomerService.getItemsSimple(1).subscribe(result => (this.CustomerLst = result));
@@ -94,41 +89,9 @@ export class TransactionComponent implements OnInit, OnDestroy {
   }
 
   search() {
-    this.transSC.Couriers_Id = this.selectedCouriers[0].ID;
-    this.transSC.Customers_IDs = this.selectedCustomers.map(function(item) {
-      return item.ID;
-    });
-    this._ShipmentService.getFiltered(this.transSC).subscribe(result => {
-      this.list = result;
-    });
+    this._ShipmentService.;
   }
-  save() {
-    const transactionlst: Transaction[] = [];
-    this.list.forEach(p => {
-      transactionlst.push({
-        ID: p.Transaction.ID,
-        IsDelivered: this.transSC.IsDelivered,
-        Shipments_Id: p.ID,
-        DeliveryStatuses_Id: p.Transaction.DeliveryStatuses_Id,
-        IDTypes_Id: p.Transaction.IDTypes_Id,
-        IDNum: p.Transaction.IDNum,
-        Notes: p.Transaction.Notes
-      });
-    });
-
-    /* transactionlst = this.list.map<Transaction>(p => ({
-      ID: p.Transaction.ID,
-      IsDelivered: this.transSC.IsDelivered,
-      Shipments_Id: p.ID,
-      DeliveryStatuses_Id: p.Transaction.DeliveryStatuses_Id,
-      IDTypes_Id: p.Transaction.IDTypes_Id,
-      IDNum: p.Transaction.IDNum,
-      Notes: p.Transaction.Notes
-    })); */
-    this._Service.save(transactionlst).subscribe(result => {
-      this.list = [];
-    });
-  }
+  save() {}
 
   onItemSelect(item: any) {
     console.log(item);

@@ -22,8 +22,7 @@ export class TransactionListComponent implements OnInit, AfterViewInit, OnDestro
   public dtElement: DataTableDirective;
   dtTrigger: Subject<any> = new Subject();
   DeliveryStatuses = {};
-  deliverypersonseting = {};
-  IDTypeSeting = {};
+
   @Input() list: Shipment[];
   @Input() isDelivered: boolean;
 
@@ -104,33 +103,10 @@ export class TransactionListComponent implements OnInit, AfterViewInit, OnDestro
       unSelectAllText: 'UnSelect All',
       enableSearchFilter: true,
       badgeShowLimit: 3,
-      labelKey: 'Name',
+      labelKey: 'NameEn',
       primaryKey: 'ID',
       showCheckbox: false
     };
-    this.deliverypersonseting = {
-      singleSelection: true,
-      text: 'deliverypersons',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      enableSearchFilter: true,
-      badgeShowLimit: 3,
-      labelKey: 'Name',
-      primaryKey: 'ID',
-      showCheckbox: false
-    };
-    this.IDTypeSeting = {
-      singleSelection: true,
-      text: 'IDTypes',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      enableSearchFilter: true,
-      badgeShowLimit: 3,
-      labelKey: 'Name',
-      primaryKey: 'ID',
-      showCheckbox: false
-    };
-
 
     this.idTypesSub = this._idTypesService.getAll().subscribe(result => {
       this.IDTypes = result;

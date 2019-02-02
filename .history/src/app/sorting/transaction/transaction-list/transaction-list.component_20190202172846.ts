@@ -104,7 +104,7 @@ export class TransactionListComponent implements OnInit, AfterViewInit, OnDestro
       unSelectAllText: 'UnSelect All',
       enableSearchFilter: true,
       badgeShowLimit: 3,
-      labelKey: 'Name',
+      labelKey: 'NameEn',
       primaryKey: 'ID',
       showCheckbox: false
     };
@@ -115,7 +115,7 @@ export class TransactionListComponent implements OnInit, AfterViewInit, OnDestro
       unSelectAllText: 'UnSelect All',
       enableSearchFilter: true,
       badgeShowLimit: 3,
-      labelKey: 'Name',
+      labelKey: 'NameEn',
       primaryKey: 'ID',
       showCheckbox: false
     };

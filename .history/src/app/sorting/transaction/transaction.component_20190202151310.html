@@ -20,7 +20,7 @@
         #Customer="ngModel"
         required
         [data]="CustomerLst"
-        [(ngModel)]="selectedCustomers"
+        [(ngModel)]="selectedCustomer"
         [settings]="CustomerSettings" 
         (onSelect)="onItemSelect($event)" 
         (onSelectAll)="onSelectAll($event)"
@@ -62,10 +62,10 @@
         <label>Status</label>
         <div>
           <label class="radio-inline">
-            <input type="radio" name="Status" id="optionsRadiosInline1" [(ngModel)]="transSC.IsDelivered" [value]="true" />Receive
+            <input type="radio" name="Status" id="optionsRadiosInline1" [(ngModel)]="transSC.IsDelivered" value="1" checked="true" />Receive
           </label>
           <label class="radio-inline">
-            <input type="radio" name="Status" id="optionsRadiosInline2" [(ngModel)]="transSC.IsDelivered" [value]="false" />Return
+            <input type="radio" name="Status" id="optionsRadiosInline2" [(ngModel)]="transSC.IsDelivered" value="2" />Return
           </label>
         </div>
       </fieldset>

@@ -12,7 +12,7 @@
             <td>Customer</td>
             <td>Transaction Date</td>
             <td *ngIf="!isDelivered"><span>Return Reason</span></td>
-            <td *ngIf="!isDelivered"><span>Notes</span></td>
+            <td *ngIf="!isDelivered"><span><Notes</span></td>
             <td *ngIf="isDelivered"><span>Delivered Person</span></td>
             <td *ngIf="isDelivered"><span>ID Types</span></td>
             <td *ngIf="isDelivered"><span>ID Number</span></td>
@@ -37,51 +37,26 @@
               </button>
             </td>
             <td *ngIf="!isDelivered">
-
-              <angular2-multiselect
-              name="DeliveryStatuses"
-              #Courier="ngModel"
-              required
-              [data]="returnResons"
-              [(ngModel)]="_item.Transaction.DeliveryStatuses_Id"
-              [settings]="DeliveryStatuses"
-            >
-
-            </angular2-multiselect>
+              <div class="form-group">
+                <form autocomplete="off">
+                  <input class="form-control" type="text" autocomplete [config]="config1" [items]="returnResons" />
+                </form>
+              </div>
             </td>
-            <td *ngIf="!isDelivered"><input class="form-control" type="text"  [(ngModel)]="_item.Transaction.Notes" /></td>
-            
+            <td *ngIf="!isDelivered"><input class="form-control" type="text" /></td>
             <td *ngIf="isDelivered">
-                <angular2-multiselect
-                name="deliverypersons"
-                #Courier="ngModel"
-                required
-                [data]="deliverypersons"
-                [(ngModel)]="_item.Transaction.DeliveryStatuses_Id"
-                [settings]="deliverypersonseting"
-              >
-  
-              </angular2-multiselect>
-
-              <!-- <div class="form-group">
-                  <input class="form-control" type="text" autocomplete [config]="config2" [items]="deliverypersons"  [(ngModel)]="_item.Transaction.DeliveryStatuses_Id" />
-              </div> -->
+              <div class="form-group">
+                <form autocomplete="off">
+                  <input class="form-control" type="text" autocomplete [config]="config2" [items]="deliverypersons" />
+                </form>
+              </div>
             </td>
             <td *ngIf="isDelivered">
-                <angular2-multiselect
-                name="IDTypes"
-                #Courier="ngModel"
-                required
-                [data]="IDTypes"
-                [(ngModel)]="_item.Transaction.DeliveryStatuses_Id"
-                [settings]="IDTypeSeting"
-                >
-              </angular2-multiselect>
-<!-- 
-              <div class="form-group"><input class="form-control" type="text" autocomplete [config]="config3" [items]="IDTypes"  [(ngModel)]="_item.Transaction.IDTypes_Id" />
-              </div> -->
+              <div class="form-group">
+                <form autocomplete="off"><input class="form-control" type="text" autocomplete [config]="config3" [items]="IDTypes" /></form>
+              </div>
             </td>
-            <td *ngIf="isDelivered"><input class="form-control" type="text" [(ngModel)]="_item.Transaction.IDNum" /></td>
+            <td *ngIf="isDelivered"><input class="form-control" type="text" /></td>
           </tr>
         </tbody>
       </table>

@@ -23,7 +23,7 @@ export class TransactionListComponent implements OnInit, AfterViewInit, OnDestro
   dtTrigger: Subject<any> = new Subject();
   DeliveryStatuses = {};
   deliverypersonseting = {};
-  IDTypeSeting = {};
+  IDTypeSeting= {};
   @Input() list: Shipment[];
   @Input() isDelivered: boolean;
 
@@ -104,7 +104,7 @@ export class TransactionListComponent implements OnInit, AfterViewInit, OnDestro
       unSelectAllText: 'UnSelect All',
       enableSearchFilter: true,
       badgeShowLimit: 3,
-      labelKey: 'Name',
+      labelKey: 'NameEn',
       primaryKey: 'ID',
       showCheckbox: false
     };
@@ -115,7 +115,7 @@ export class TransactionListComponent implements OnInit, AfterViewInit, OnDestro
       unSelectAllText: 'UnSelect All',
       enableSearchFilter: true,
       badgeShowLimit: 3,
-      labelKey: 'Name',
+      labelKey: 'NameEn',
       primaryKey: 'ID',
       showCheckbox: false
     };
@@ -126,7 +126,7 @@ export class TransactionListComponent implements OnInit, AfterViewInit, OnDestro
       unSelectAllText: 'UnSelect All',
       enableSearchFilter: true,
       badgeShowLimit: 3,
-      labelKey: 'Name',
+      labelKey: 'NameEn',
       primaryKey: 'ID',
       showCheckbox: false
     };

@@ -47,7 +47,7 @@ export class TransactionComponent implements OnInit, OnDestroy {
       this.list = result;
       this.list.forEach(x => {
         if (!x.Transaction) {
-          x.Transaction = { ID: 0, DeliveryStatuses_Id: null, IDNum: '', IDTypes_Id: null, Notes: '' };
+          x.Transaction = { ID: 0, DeliveryStatuses_Id: 0, IDNum: '', IDTypes_Id: 0, Notes: '' };
         }
       });
     });
