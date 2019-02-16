@@ -1,0 +1,86 @@
+<div class="col col-sm-12">
+  <div class="card mb-3">
+    <div class="card-header">Transaction</div>
+    <div class="card-body">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped row-border hover">
+        <thead id="table">
+          <tr>
+            <th>Code</th>
+            <th>Organization</th>
+            <th>Vendor</th>
+            <th>Courier</th>
+            <th>Customer</th>
+            <th>Transaction Date</th>
+            <th *ngIf="!isDelivered">Return Reason</th>
+            <th *ngIf="!isDelivered">Notes</th>
+            <th *ngIf="isDelivered">Delivered Person</th>
+            <th *ngIf="isDelivered">ID Types</th>
+            <th *ngIf="isDelivered">ID Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let _item of list">
+            <td>{{ _item.Code }}</td>
+            <td>{{ _item.Organization?.Name }}</td>
+            <td>{{ _item.Vendor?.Name }}</td>
+            <td>{{ _item.Courier?.Name }}</td>
+            <td>
+              <a href="#">{{ _item.Customer?.Name }}</a>
+            </td>
+            <td>
+              <a href="#">{{
+                _item.Transaction
+                  ? _item.Transaction?.TransactionDt
+                  : _item.ShipmentDt.day + '/' + _item.ShipmentDt.month + '/' + _item.ShipmentDt.year
+              }}</a>
+            </td>
+            <td *ngIf="!isDelivered">
+              <div class="form-group">
+                <form autocomplete="off">
+                  <input
+                    class="form-control"
+                    type="text"
+                    autocomplete
+                    [config]="config1"
+                    [items]="returnResons"
+                    [(ngModel)]="_item.Transaction.DeliveryStatuses_Id"
+                  />
+                </form>
+              </div>
+            </td>
+            <td *ngIf="!isDelivered"><input class="form-control" type="text" [(ngModel)]="_item.Transaction.Notes" /></td>
+            <td *ngIf="isDelivered">
+              <div class="form-group">
+                <form autocomplete="off">
+                  <input
+                    class="form-control"
+                    type="text"
+                    autocomplete
+                    [config]="config2"
+                    [items]="deliverypersons"
+                    [(ngModel)]="_item.Transaction.DeliveryStatuses_Id"
+                  />
+                </form>
+              </div>
+            </td>
+            <td *ngIf="isDelivered">
+              <div class="form-group">
+                <form autocomplete="off">
+                  <input
+                    class="form-control"
+                    type="text"
+                    autocomplete
+                    [config]="config3"
+                    [items]="IDTypes"
+                    [(ngModel)]="_item.Transaction.IDTypes_Id"
+                  />
+                </form>
+              </div>
+            </td>
+            <td *ngIf="isDelivered"><input class="form-control" type="text" [(ngModel)]="_item.Transaction.IDNum" /></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

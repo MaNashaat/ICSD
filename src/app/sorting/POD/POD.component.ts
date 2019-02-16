@@ -28,7 +28,7 @@ export class PODComponent implements OnInit, AfterViewInit {
   list: any[] = [];
   dtOptions: DataTables.Settings = {};
   operation = 'view';
-  item = {};
+  item: ShipmentBOD;
   Cutstomers: any[];
   SelectedCustomerID: number;
   configCustomer: any = { placeholder: 'Select Country', sourceField: ['NameEn'] };
@@ -93,7 +93,7 @@ export class PODComponent implements OnInit, AfterViewInit {
       dtInstance.state.clear();
     });
   }
-  open = function(_item: any) {
+  open = function(_item?: any) {
     this.detailsForm.reset();
     this.operation = _item == null ? 'add' : 'edit';
     switch (this.operation) {

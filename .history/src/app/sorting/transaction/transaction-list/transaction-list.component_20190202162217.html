@@ -1,0 +1,109 @@
+<div class="col col-sm-12">
+  <div class="card mb-3">
+    <div class="card-header">Transaction</div>
+    <div class="card-body">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped row-border hover">
+        <tbody>
+          <tr>
+            <td>Code</td>
+            <td>Organization</td>
+            <td>Vendor</td>
+            <td>Courier</td>
+            <td>Customer</td>
+            <td>Transaction Date</td>
+            <td *ngIf="!isDelivered"><span>Return Reason</span></td>
+            <td *ngIf="!isDelivered"><span>Notes</span></td>
+            <td *ngIf="isDelivered"><span>Delivered Person</span></td>
+            <td *ngIf="isDelivered"><span>ID Types</span></td>
+            <td *ngIf="isDelivered"><span>ID Number</span></td>
+          </tr>
+          <tr *ngFor="let _item of list">
+            <td>{{ _item.Code }}</td>
+            <td>{{ _item.Organization?.Name }}</td>
+            <td>{{ _item.Vendor?.Name }}</td>
+            <td>{{ _item.Courier?.Name }}</td>
+            <td>
+              <button class="btn btn-link" type="button" (click)="openModal(content, 1, _item.Customer.ID)">
+                {{ _item.Customer?.Name }}
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-link" type="button" (click)="openModal(content, 2)">
+                {{
+                  _item.Transaction
+                    ? _item.Transaction?.TransactionDt
+                    : _item.ShipmentDt.day + '/' + _item.ShipmentDt.month + '/' + _item.ShipmentDt.year
+                }}
+              </button>
+            </td>
+            <td *ngIf="!isDelivered">
+              <div class="form-group">
+                <form autocomplete="off">
+                  <input class="form-control" type="text" autocomplete [config]="config1" [items]="returnResons" [(ngModel)]="_item.Transaction?.DeliveryStatuses_Id" />
+                </form>
+              </div>
+            </td>
+            <td *ngIf="!isDelivered"><input class="form-control" type="text" /></td>
+            <td *ngIf="isDelivered">
+              <div class="form-group">
+                <form autocomplete="off">
+                  <input class="form-control" type="text" autocomplete [config]="config2" [items]="deliverypersons" />
+                </form>
+              </div>
+            </td>
+            <td *ngIf="isDelivered">
+              <div class="form-group">
+                <form autocomplete="off"><input class="form-control" type="text" autocomplete [config]="config3" [items]="IDTypes" /></form>
+              </div>
+            </td>
+            <td *ngIf="isDelivered"><input class="form-control" type="text" /></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      <span *ngIf="type === 1">Customer Details</span> <span *ngIf="type === 2">Transaction Details</span>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group" *ngIf="type === 1">
+        <dl class="dl-horizontal" *ngIf="customer">
+          <dt>Code :</dt>
+          <dd>{{ customer.Code }}</dd>
+          <dt>Name :</dt>
+          <dd>{{ customer.Name }}</dd>
+          <dt>Mail :</dt>
+          <dd>{{ customer.Mail }}</dd>
+          <dt>Mobile :</dt>
+          <dd>{{ customer.Mobile }}</dd>
+          <dt>Addresses :</dt>
+          <dd>{{ customer.CustomerAddresses[0].Address }}</dd>
+        </dl>
+      </div>
+      <div class="form-group" *ngIf="type === 2">
+        <table class="table table-striped">
+          <tr>
+            <th>Transaction Date</th>
+            <th>Return Reason</th>
+            <th>Notes</th>
+          </tr>
+          <tr *ngFor="let itm of transactions">
+            <td>{{ itm.TransactionDt }}</td>
+            <td>{{ itm.DeliveryStatuses_Id }}</td>
+            <td>{{ itm.Notes }}</td>
+          </tr>
+        </table>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer"><button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button></div>
+</ng-template>

@@ -1,0 +1,63 @@
+<div [@routerTransition]>
+  <form name="detailsForm" #detailsForm="ngForm" class="row panel panel-body" (ngSubmit)="search()" novalidate id="collapseExample">
+    <div class="col-xl-4">
+      <label>Courier</label>
+            <angular2-multiselect name="Courier" #Courier="ngModel" required [data]="CourierLst" [(ngModel)]="transSC.Couriers_Id" [settings]="CourierSettings">
+              </angular2-multiselect>
+              <!-- 
+              <input class="form-control" type="text" autocomplete [config]="config1" [items]="CourierLst" [required]="true" /></form> -->
+    </div>
+    <div class="col-xl-4">
+      <label>Customer</label>
+      <angular2-multiselect name="Customer" #Customer="ngModel" required [data]="CourierLst" [(ngModel)]="transSC.CustomerIDs" [settings]="CourierSettings">
+        </angular2-multiselect><!-- 
+      <div class="form-group">
+        <form autocomplete="off"><input class="form-control" type="text" autocomplete [config]="config2" [items]="CustomerLst" /></form>
+      </div> -->
+    </div>
+    <div class="col-xl-4">
+      <br />
+      <button
+        class="btn btn-success"
+        [disabled]="detailsForm.invalid"
+        type="submit"
+        data-toggle="collapse"
+        href="#collapseExample"
+        role="button"
+        aria-expanded="true"
+        aria-controls="collapseExample"
+      >
+        Search <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="col-xl-4">
+      <label>Transaction Date <span class="text-danger">*</span>: </label>
+      <div class="form-group">
+        <div class="input-group datepicker-input">
+          <input
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="TransactionDt"
+            [(ngModel)]="item.TransactionDt"
+            #TransactionDt="ngModel"
+            readonly
+          />
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4">
+      <fieldset class="form-group">
+        <label>Status</label>
+        <div>
+          <label class="radio-inline">
+            <input type="radio" name="Status" id="optionsRadiosInline1" [(ngModel)]="item.IsDelivered" value="1" checked="true" />Receive
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="Status" id="optionsRadiosInline2" [(ngModel)]="item.IsDelivered" value="2" />Return
+          </label>
+        </div>
+      </fieldset>
+    </div>
+  </form>
+  <div class="row"><app-transaction-list [isDelivered]="item.IsDelivered" [list]="list"></app-transaction-list></div>
+</div>

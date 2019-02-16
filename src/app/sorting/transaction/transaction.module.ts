@@ -11,9 +11,13 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { NgbTypeaheadModule, NgbDatepickerModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { AutocompleteModule } from 'ng2-input-autocomplete';
+<<<<<<< HEAD
+=======
+import { VarDirective } from 'src/app/shared/directives/variable.directive';
+>>>>>>> 47aa3762b63201519153c39c42695b5ab12e326b
 
 @NgModule({
-  declarations: [TransactionComponent, TransactionListComponent],
+  declarations: [TransactionComponent, TransactionListComponent, VarDirective],
   imports: [
     ReactiveFormsModule,
     FormsModule,
