@@ -62,7 +62,32 @@
           </li>
         </ul>
       </li>
+      
     </div>
+    <div class="nested-menu">
+        <a class="list-group-item" (click)="addExpandClass('Organizations')">
+          <i class="fa fa-random"></i>&nbsp; <span>{{ 'Organizations' | translate }}</span>
+        </a>
+        <li class="nested" [class.expand]="showMenu === 'Organizations'">
+            <ul class="submenu">
+                <li>
+                  <a routerLink="/shipment" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                    <i class="fa fa-truck"></i>&nbsp; <span>{{ 'Link1' | translate }}</span>
+                  </a>
+                </li>
+                <li>
+                    <a routerLink="/shipment" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                      <i class="fa fa-truck"></i>&nbsp; <span>{{ 'Link1' | translate }}</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a routerLink="/shipment" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                      <i class="fa fa-truck"></i>&nbsp; <span>{{ 'Link1' | translate }}</span>
+                    </a>
+                  </li>
+                </ul>
+        </li>
+      </div>
 
     <!---  <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;

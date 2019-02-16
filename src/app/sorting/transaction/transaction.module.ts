@@ -8,7 +8,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
 import { PageHeaderModule } from 'src/app/shared';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
-import { NgbTypeaheadModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTypeaheadModule, NgbDatepickerModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { AutocompleteModule } from 'ng2-input-autocomplete';
 
 @NgModule({
   declarations: [TransactionComponent, TransactionListComponent],
@@ -19,10 +21,14 @@ import { NgbTypeaheadModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootst
     TransactionRoutingModule,
     DataTablesModule,
     PageHeaderModule,
+    AngularMultiSelectModule,
+    AutocompleteModule,
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger' // set defaults here
     }),
     NgbTypeaheadModule.forRoot(),
-    NgbDatepickerModule.forRoot()]
+    NgbDatepickerModule.forRoot(),
+    NgbModalModule
+  ]
 })
 export class TransactionModule {}
