@@ -29,7 +29,7 @@ export class CustomerService {
   }
 
   GetBycode(code: string): Observable<Customer> {
-
+    console.log('GetBycode');
     return <Observable<Customer>>this.http.get(environment.apiURL + 'Customer/GetBycode?code=' + code);
   }
   getAddressesByCustomer(customerId: number): Observable<CustomerAddresses[]> {

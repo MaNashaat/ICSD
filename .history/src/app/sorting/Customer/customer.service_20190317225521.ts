@@ -29,13 +29,12 @@ export class CustomerService {
   }
 
   GetBycode(code: string): Observable<Customer> {
-
-    return <Observable<Customer>>this.http.get(environment.apiURL + 'Customer/GetBycode?code=' + code);
+    return <Observable<Customer>>this.http.get(environment.apiURL + 'Customer/GetBycode/' + code);
   }
   getAddressesByCustomer(customerId: number): Observable<CustomerAddresses[]> {
     return <Observable<CustomerAddresses[]>>this.http.get(environment.apiURL + 'Customer/GetAddressesByCustomer?customerId=' + customerId);
   }
-
+  
   getDefaultAddressByCustomer(customerId: number): Observable<CustomerAddresses> {
     return <Observable<CustomerAddresses>>
     this.http.get(environment.apiURL + 'Customer/GetDefaultAddressByCustomer?customerId=' + customerId);
