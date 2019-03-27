@@ -27,16 +27,28 @@ export class DeliveriesAndReturnsComponent implements OnInit {
       ShipmentDt: null
     };
   }
+  open = function(_item?: any) {
+    this.detailsForm.reset();
+    this.operation = _item == null ? 'add' : 'edit';
+    switch (this.operation) {
+      case 'add':
+        this.item = {};
+        break;
+      case 'edit':
+        this.item = Object.assign({}, _item);
+        break;
+    }
+  };
   save() {
     // tslint:disable-next-line:no-debugger
     debugger;
-     if ( this.sinImputarValue === 'D') {
-       this.item.IsDeliverd = true;
-     } else if (this.sinImputarValue === 'R') {
-       this.item.IsDeliverd = false;
-     } else {
-       this.item.IsDeliverd = null;
-     }
+    // if ( this.sinImputarValue === 'D') {
+    //   this.item.IsDeliverd = true;
+    // } else if (this.sinImputarValue === 'R') {
+    //   this.item.IsDeliverd = false;
+    // } else {
+    //   this.item.IsDeliverd = null;
+    // }
     this.serviceApi.DeliveriesAndReturnsReport(this.item).subscribe(result => {
       const file = new Blob(['Hello world!'], { type: 'application/pdf' });
       const fileURL = URL.createObjectURL(file);

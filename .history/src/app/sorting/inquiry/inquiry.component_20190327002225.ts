@@ -29,7 +29,12 @@ export class InquiryComponent implements OnInit {
       Mobile: null
     };
   }
-
+  ngAfterViewInit(): void {
+    this.dtTrigger.next();
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.state.clear();
+    });
+  }
   save() {
     this.serviceApi.InquiryReport(this.item).subscribe(result => {
       this.list = result;
@@ -61,7 +66,13 @@ export class InquiryComponent implements OnInit {
     }, 0);
   }
 
-
+  refreshDataSource(list): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.destroy();
+      this.list = list;
+      this.dtTrigger.next();
+    });
+  }
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',

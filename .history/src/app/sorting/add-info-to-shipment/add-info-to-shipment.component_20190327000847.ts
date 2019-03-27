@@ -31,7 +31,7 @@ export class AddInfoToShipmentComponent implements OnInit {
     private http: Http,
     private router: Router
     ) {
-      this.item = {
+      item = {
         Name: null,
         NameAr: null,
         NameEn: null,
