@@ -13,11 +13,8 @@ export class InquiryService {
   constructor(private http: HttpClient) {}
 
 
-
-  InquiryReport(item): any {
-
-   return this.http.post(environment.apiURL + 'Inquiry/Inquiry', item);
-
-  }
+  CustomerInquery(item): Observable<object> {
+    return this.http.post(environment.apiURL + 'Operation/CustomerInquery', item);
+   }
 
 }

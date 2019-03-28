@@ -1,6 +1,7 @@
 <div [@routerTransition]>
    
-    
+       
+
     <form name="detailsForm" #detailsForm="ngForm" class="row" (ngSubmit)="save();"  novalidate>
         <div class="col col-sm-12">
             <div class="card mb-3">
@@ -13,33 +14,34 @@
                             <label>Code
                                 <span class="text-danger">*</span>: </label>
                             <div class="form-group">
-                                <input #Code="ngModel"  name="Code" class="form-control" type="text"
-                                 required
-                                  pattern="{{patterns.Alphanumeric}}" 
-                                  [(ngModel)]="item.Code"
+                                <input #Code="ngModel"  name="Code" class="form-control" type="text" required pattern="{{patterns.Alphanumeric}}" [(ngModel)]="item.Code"
                                 (blur)="getCustomerInfo(item.Code)"   autofocus />
                             </div>
-                            
                             <div *ngIf="Code.invalid && (Code.dirty || Code.touched)" class="alert alert-danger">
-                                <div *ngIf="Code.errors['required']">Code is required.</div>
-                                <div *ngIf="Code.errors['pattern']">Code is not valid.</div>
-                              </div>
+                                <span *ngIf="Code.errors.required">
+                                    Code is required.
+                                </span>
+                                <span *ngIf="Code.errors.pattern">
+                                    Code is not valid.
+                                </span>
+                            </div>
                         </div>
                         <div class="col-xl-6">
                             <label>Name English
                                 <span class="text-danger">*</span>: </label>
                             <div class="form-group">
-                                <input #NameEn="ngModel" disabled name="NameEn" class="form-control" type="text" required pattern="{{patterns.Alphanumeric}}" [(ngModel)]="item.NameEn"
+                                <input #NameEn="ngModel" disabled name="NameEn" class="form-control" type="text" required  [(ngModel)]="item.NameEn"
                                     autofocus />
                             </div>
                             <div *ngIf="NameEn.invalid && (NameEn.dirty || NameEn.touched)" class="alert alert-danger">
-                                <div *ngIf="NameEn.errors['required']">NameEn is required.</div>
-                                <div *ngIf="NameEn.errors['pattern']">NameEn is not valid.</div>
-                              </div>
+                                <div *ngIf="NameEn.errors.required">
+                                    NameEn is required.
+                                </div>
+                                <div *ngIf="NameEn.errors.pattern">
+                                    NameEn is not valid.
+                                </div>
+                            </div>
                         </div>
-                        
-                      
-                        
                         <div class="col-xl-6">
                             <label>Phone Number
                                 <span class="text-danger">*</span>: </label>
@@ -48,16 +50,14 @@
                                     autofocus />
                             </div>
                             <div *ngIf="Mobile.invalid && (Mobile.dirty || Mobile.touched)" class="alert alert-danger">
-                                <div *ngIf="Mobile.errors['required']">
+                                <div *ngIf="Mobile.errors.required">
                                     Mobile is required.
                                 </div>
-                                <div *ngIf="Mobile.errors['pattern']">
+                                <div *ngIf="Mobile.errors.pattern">
                                     Mobile is not valid.
                                 </div>
                             </div>
-                           
                         </div>
-                      
                         <div class="col-xl-6">
                             <label>Address
                                 <span class="text-danger">*</span>: </label>
@@ -66,15 +66,14 @@
                                     autofocus />
                             </div>
                             <div *ngIf="Address.invalid && (Address.dirty || Address.touched)" class="alert alert-danger">
-                                <div *ngIf="Address.errors['required']">
+                                <div *ngIf="Address.errors.required">
                                     Address is required.
                                 </div>
-                                <div *ngIf="Address.errors['pattern']">
+                                <div *ngIf="Address.errors.pattern">
                                     Address is not valid.
                                 </div>
                             </div>
-                        </div>
-                            
+                        </div>                            
                         <div class="col-xl-12">
                             <label>Notes
                                 <span class="text-danger">*</span>: </label>
@@ -83,10 +82,10 @@
                                     autofocus ></textarea>
                             </div>
                             <div *ngIf="Notes.invalid && (Notes.dirty || Notes.touched)" class="alert alert-danger">
-                                <div *ngIf="Notes.errors['required']">
+                                <div *ngIf="Notes.errors.required">
                                     Notes is required.
                                 </div>
-                                <div *ngIf="Notes.errors['pattern']">
+                                <div *ngIf="Notes.errors.pattern">
                                     Notes is not valid.
                                 </div>
                             </div>

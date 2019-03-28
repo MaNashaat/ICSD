@@ -3,9 +3,14 @@ import { PatternsService } from '../../shared/services/patterns.service';
 import { routerTransition } from '../../router.animations';
 import { NgForm } from '@angular/forms';
 import { Subject } from 'rxjs';
+
 import { DataTableDirective } from 'angular-datatables';
+import { Http, Response } from '@angular/http';
 import { InquiryService } from './inquiry.service';
+import { ActivatedRoute, Router, ChildActivationEnd } from '@angular/router';
+import { filter, take } from 'rxjs/operators';
 import { Inquiry } from './Inquiry';
+
 declare let jsPDF;
 @Component({
   selector: 'inquiry-page',
@@ -16,11 +21,11 @@ declare let jsPDF;
 })
 export class InquiryComponent implements OnInit {
   @ViewChild('detailsForm') public detailsForm: NgForm;
-  dtElement: DataTableDirective;
-  dtTrigger: Subject<any> = new Subject();
-  dtOptions: DataTables.Settings = {};
   item: Inquiry;
-  list: any[] = [];
+  list: any;
+  dtElement: DataTableDirective;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
   constructor(private content: ElementRef, private serviceApi: InquiryService, public patterns: PatternsService) {
     // this.list.push({Code: 1, NameAr: 'Ahmed', NameEn: 'Ahmed'});
     this.item = {
@@ -29,11 +34,25 @@ export class InquiryComponent implements OnInit {
       Mobile: null
     };
   }
-
-  save() {
-    this.serviceApi.InquiryReport(this.item).subscribe(result => {
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngAfterViewInit(): void {
+    this.dtTrigger.next();
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.state.clear();
+    });
+  }
+  refreshDataSource(list): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.destroy();
+      this.list = list;
+      this.dtTrigger.next();
+    });
+  }
+  search() {
+    this.serviceApi.CustomerInquery(this.item).subscribe(result => {
+      // debugger ;
       this.list = result;
-
+      // this.item = { name: 'ahmed' };
     });
   }
   print() {
@@ -60,8 +79,6 @@ export class InquiryComponent implements OnInit {
       );
     }, 0);
   }
-
-
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',

@@ -6,4 +6,5 @@ export class ShipmentBOD {
   public NameAr: string;
   public NameEn: string;
   public Code: string;
+
 }

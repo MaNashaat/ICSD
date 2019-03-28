@@ -22,15 +22,16 @@ export class CityComponent implements OnInit, AfterViewInit {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
   dtTrigger: Subject<any> = new Subject();
-  dtOptions: DataTables.Settings = {};
-
   list: any[] = [];
+  dtOptions: DataTables.Settings = {};
   operation = 'view';
   item: City;
   Countries: any[];
   config2: any = { placeholder: 'Select Country', sourceField: ['NameEn'] };
 
-  constructor(private serviceApi: CityService, private countryService: CountryService, public patterns: PatternsService) {}
+  constructor(private serviceApi: CityService,
+     private countryService: CountryService,
+      public patterns: PatternsService) {}
 
   ngAfterViewInit(): void {
     this.dtTrigger.next();
@@ -38,6 +39,7 @@ export class CityComponent implements OnInit, AfterViewInit {
       dtInstance.state.clear();
     });
   }
+  
   open = function(_item?: any) {
     this.detailsForm.reset();
     this.operation = _item == null ? 'add' : 'edit';

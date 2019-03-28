@@ -29,7 +29,8 @@ const routes: Routes = [
       { path: 'deliveries-and-returns', loadChildren: '../sorting/deliveries-and-returns/deliveries-and-returns.module#DeliveriesAndReturnsModule'}
       ,
       { path: 'inquiry', loadChildren: '../sorting/inquiry/inquiry.module#InquiryModule'},
-      { path: 'AddInfoToShipmentService', loadChildren: '../sorting/add-info-to-shipment/add-info-to-shipment.module#AddInfoToShipmentModule'}
+      { path: 'AddInfoToShipmentService', loadChildren: '../sorting/add-info-to-shipment/add-info-to-shipment.module#AddInfoToShipmentModule'},
+      { path: 'operations', loadChildren: '../sorting/operations-in-organization/operations-in-organization.module#OperationsInOrganizationModule'},
 
     ]
   }

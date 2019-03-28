@@ -13,7 +13,7 @@ export class AddInfoToShipmentService {
 
   constructor(private http: HttpClient) { }
 
-  AddStatement(shipment): Observable<any[]> {
-    return <Observable<any[]>>this.http.post(environment.apiURL + 'Operation/AddStatement', shipment);
+  AddStatement(item): Observable<object> {
+   return this.http.post(environment.apiURL + 'Operation/AddStatement', item);
   }
 }

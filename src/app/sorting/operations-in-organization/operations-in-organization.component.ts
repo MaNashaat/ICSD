@@ -12,6 +12,7 @@ import { filter, take } from 'rxjs/operators';
 import { TranslateService } from '../../../../node_modules/@ngx-translate/core';
 declare let jsPDF;
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'OperationsInOrganization-page',
   templateUrl: './operations-in-organization.component.html',
   // styleUrls: ['./deliveries-and-returns.component.scss'],
@@ -22,9 +23,9 @@ export class OperationsInOrganizationComponent implements OnInit {
   @ViewChild('detailsForm') public detailsForm: NgForm;
   item: string;
   list: any;
+  dtOptions: DataTables.Settings = {};
   dtElement: DataTableDirective;
   dtTrigger: Subject<any> = new Subject();
-  dtOptions: DataTables.Settings = {};
   constructor(
     private content: ElementRef,
     private translate: TranslateService,
@@ -39,6 +40,8 @@ export class OperationsInOrganizationComponent implements OnInit {
       dtInstance.state.clear();
     });
   }
+  // tslint:disable-next-line:use-life-cycle-interface
+
   refreshDataSource(list): void {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
       dtInstance.destroy();

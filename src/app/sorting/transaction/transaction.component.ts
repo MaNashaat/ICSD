@@ -60,7 +60,6 @@ export class TransactionComponent implements OnInit, OnDestroy {
 
     this.transSC = { TransactionDt: this.formatDate(new Date()), IsDelivered: true };
 
-
     this.CourierLstSub = this._CustomerService.getItemsSimple(0).subscribe(result => (this.CourierLst = result));
     this.CustomerLstSub = this._CustomerService.getItemsSimple(1).subscribe(result => (this.CustomerLst = result));
 
@@ -97,6 +96,7 @@ export class TransactionComponent implements OnInit, OnDestroy {
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
+
     return day + '/' + month + '/' + year;
   }
 
