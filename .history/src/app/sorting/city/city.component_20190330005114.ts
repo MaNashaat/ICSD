@@ -9,7 +9,6 @@ import { Http, Response } from '@angular/http';
 import { CityService } from './city.service';
 import { CountryService } from '../country/country.service';
 import { City } from './city';
-import { Country } from '../country/country';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -27,11 +26,12 @@ export class CityComponent implements OnInit, AfterViewInit {
   dtOptions: DataTables.Settings = {};
   operation = 'view';
   item: City;
-  country: Country;
   Countries: any[];
   config2: any = { placeholder: 'Select Country', sourceField: ['NameEn'] };
 
-  constructor(private serviceApi: CityService, private countryService: CountryService, public patterns: PatternsService) {}
+  constructor(private serviceApi: CityService,
+     private countryService: CountryService,
+      public patterns: PatternsService) {}
 
   ngAfterViewInit(): void {
     this.dtTrigger.next();
@@ -104,7 +104,6 @@ export class CityComponent implements OnInit, AfterViewInit {
   }
 
   CountrySelected(event) {
-    this.country = event;
     this.serviceApi.getItems(event.ID).subscribe(list => {
       this.refreshDataSource(list);
     });
